@@ -1,0 +1,353 @@
+<!--header-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top black-nav sticky-navigation">
+    <a class="navbar-brand" href="#"><img id="logo" src="assets/img/logo.png" /></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-3">
+                <a class="nav-link page-scroll" href="#features">Features <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link page-scroll" href="#pricing">Pricing</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link page-scroll" href="#download">Download</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link page-scroll" href="#team">Team</a>
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link page-scroll" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item mr-3" style="margin-top: 7px;">
+                    <button class="btn btn-lg btn-custom" (click)="openModal(template)">Launch demo modal</button>
+                <!--<a href="#" (click)="open()" class="nav-link page-scroll">Pros</a> -->
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--main section-->
+<section class="bg-texture-black hero pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-white wow fadeIn">
+                <div class="mt-5 pt-5 d-none d-md-block"></div>
+                <h1>Spo(r)ts</h1>
+                <h2>Play your favorite <span class="text-orange">sport</span> at your favorite <span class="text-orange">spot</span></h2>
+                <p class="mt-4 lead">
+                    Spo(r)ts is an app that allow you to keep your friends up to sports
+                </p>
+                <p class="mt-5">
+                    <a href="https://play.google.com/store?hl=fr" target="_blank" class="mr-2"><img src="assets/img/google-play.png" class="store-img"/></a>
+                    <a href="https://www.apple.com/fr/ios/app-store/" target="_blank"><img src="assets/img/apple_store.png" class="store-img"/> </a>
+                </p>
+            </div>
+            <div class="col-md-6 pt-5 d-none d-md-block wow fadeInRight">
+                <img class="img-fluid mx-auto d-block" src="assets/img/shot-3.png"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--main features-->
+<section class="bg-white" id="features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
+                <h2 class="text-black">Why Choose Spo(r)ts?</h2>
+                <p class="lead">
+                    Appster is more than just an event app.
+                </p>
+            </div>
+        </div>
+        <div class="row d-md-flex mt-4 text-center">
+            <div class="col-sm-6 col-md-3 mt-2">
+                <div class="card border-none wow fadeIn">
+                    <div class="card-body">
+                        <div class="icon-box">
+                            <i class="material-icons dp36">map</i>
+                        </div>
+                        <h5 class="card-title text-black pt-5">Get your own map</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mt-2">
+                <div class="card border-none wow fadeIn">
+                    <div class="card-body">
+                        <div class="icon-box">
+                            <i class="material-icons dp36">add_location</i>
+                        </div>
+                        <h5 class="card-title text-black pt-5">Add your Spot</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mt-2">
+                <div class="card border-none wow fadeIn">
+                    <div class="card-body">
+                        <div class="icon-box">
+                            <i class="material-icons dp36">supervised_user_circle</i>
+                        </div>
+                        <h5 class="card-title text-black pt-5">Build your team</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mt-2">
+                <div class="card border-none wow fadeIn">
+                    <div class="card-body">
+                        <div class="icon-box">
+                            <i class="material-icons dp36">directions_run</i>
+                        </div>
+                        <h5 class="card-title text-black pt-5">Participate to events</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--extra features-->
+<section class="bg-basketball text-white" id="extra-features">
+    <div class="bg-opacity"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12 text-center wow fadeIn">
+                <h2 class="text-orange">Features & Details</h2>
+                <p class="lead">
+                    Built for everyone to play anywhere.
+                </p>
+            </div>
+        </div>
+        <div class="row d-md-flex mt-5">
+            <div class="col-sm-4 wow fadeIn">
+                <h5 class="text-orange">Map & Spots</h5>
+                <p>Get your own map and register all the spot you like to pactise</p>
+                <h5 class="text-orange pt-5">Events</h5>
+                <p>Create or participate to any events directly on the app.</p>
+                <h5 class="text-orange pt-5">Unique Design</h5>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+            </div>
+            <div class="col-sm-4 wow fadeIn">
+                <img class="img-fluid mx-auto d-block pb-3" src="assets/img/shot-3.png" alt="Gallery">
+            </div>
+            <div class="col-sm-4 wow fadeIn">
+                <h5 class="text-orange">Unlimited Features</h5>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                <h5 class="text-orange pt-5">High Resolution</h5>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                <h5 class="text-orange pt-5">Modern Design</h5>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--pricing-->
+<section class="bg-alt" id="pricing">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-8 mx-auto text-center">
+                <h2 class="text-black">Pricing</h2>
+                <p class="lead">
+                    Our no-nonsense pricing.
+                </p>
+            </div>
+        </div>
+        <div class="row d-md-flex mt-4 text-center">
+            <div class="col-md-4 mt-2 wow fadeIn">
+                <div class="card card-outline-black">
+                    <div class="card-body">
+                        <h5 class="card-title pt-4 text-orange">Basic</h5>
+                        <h3 class="card-title text-black pt-4">FREE</h3>
+                        <p class="card-text text-muted pb-3 border-bottom-black">per month</p>
+                        <ul class="list-unstyled pricing-list">
+                            <li>Free setup</li>
+                            <li>100MB storage</li>
+                            <li>1GB bandwidth</li>
+                            <li>Basic support</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-2 wow fadeIn">
+                <div class="card card-outline-black bg-black text-white">
+                    <div class="card-body">
+                        <h5 class="card-title pt-4 text-white">Standard</h5>
+                        <h3 class="card-title text-orange pt-4"><sup>$</sup> 9.99</h3>
+                        <p class="card-text text-muted pb-3 border-bottom">per month</p>
+                        <ul class="list-unstyled pricing-list">
+                            <li>Free setup</li>
+                            <li>5GB storage</li>
+                            <li>Unlimited bandwidth</li>
+                            <li>Priority support</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-2 wow fadeIn">
+                <div class="card card-outline-black">
+                    <div class="card-body">
+                        <h5 class="card-title pt-4 text-orange">Advanced</h5>
+                        <h3 class="card-title text-black pt-4"><sup>$</sup> 19.99</h3>
+                        <p class="card-text text-muted pb-3 border-bottom-black">per month</p>
+                        <ul class="list-unstyled pricing-list">
+                            <li>Free setup</li>
+                            <li>Unlimited storage</li>
+                            <li>Unlimited bandwidth</li>
+                            <li>24/7 support</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--download-->
+<section class="bg-orange" id="download">
+    <div class="container">
+        <div class="row d-md-flex text-center wow fadeIn">
+            <div class="col-md-6 offset-md-3 col-sm-10 offset-sm-1 col-xs-12">
+                <h2 class="text-black">Download & get started today!</h2>
+                <p class="mt-4 lead">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet.
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet.
+                </p>
+                <p class="mt-5">
+                    <a href="#" class="mr-2"><img src="assets/img/google-play.png" class="store-img"/></a>
+                    <a href="#"><img src="assets/img/apple_store.png" class="store-img"/> </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--team-->
+<section class="bg-white" id="team">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-8 mx-auto text-center">
+                <h2 class="text-black">Our Team</h2>
+                <p class="lead">
+                    We're a team of three people.
+                </p>
+            </div>
+        </div>
+        <div class="row d-md-flex mt-4 text-center">
+            <div class="col-sm-4 mt-2 wow fadeIn">
+                <div class="card border-none">
+                    <div class="card-body">
+                        <img src="assets/img/team-1.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5 class="card-title text-black pt-4">John Deo</h5>
+                        <p class="card-text">App Designer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-2 wow fadeIn">
+                <div class="card border-none">
+                    <div class="card-body">
+                        <img src="assets/img/team-2.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5 class="card-title text-black pt-4">Brandon Lee</h5>
+                        <p class="card-text">Ionic Developer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-2 wow fadeIn">
+                <div class="card border-none">
+                    <div class="card-body">
+                        <img src="assets/img/team-3.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
+                        <h5 class="card-title text-black pt-4">Inza Fererri</h5>
+                        <p class="card-text">Android Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--contact-->
+<section class="bg-texture-collage-black p-0" id="contact">
+    <div class="container">
+        <div class="row d-md-flex text-white text-center wow fadeIn">
+            <div class="col-md-4 p-5">
+                <p><em class="material-icons dp36">phone</em></p>
+                <p class="lead">+49 5456 87595</p>
+            </div>
+            <div class="col-md-4 p-5">
+                <p><em class="material-icons dp36">email</em></p>
+                <p class="lead">appster.support@gmail.com</p>
+            </div>
+            <div class="col-md-4 p-5">
+                <p><em class="material-icons dp36">location_on</em></p>
+                <p class="lead">Berlin, Germany</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--footer-->
+<section class="bg-dark pt-5" id="connect">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-12 text-center wow fadeIn">
+                <h2 class="hero-heading text-muted">Spo(r)ts</h2>
+                <p class="mt-4">
+                    <a href="https://twitter.com/" target="_blank"><em class="ion-social-twitter text-twitter-alt icon-sm mr-3"></em></a>
+                    <a href="https://facebook.com/" target="_blank"><em class="ion-social-github text-facebook-alt icon-sm mr-3"></em></a>
+                    <a href="https://www.linkedin.com/" target="_blank"><em class="ion-social-linkedin text-linkedin-alt icon-sm mr-3"></em></a>
+                </p>
+                <p class="pt-2 text-muted">
+                    &copy; 2018 Spo(r)ts Page. An hybrid app for the players
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Login</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #loginForm="ngForm" (submit)="submitLogin()">
+            <div class="form-group">
+                <label for="username">Email</label>
+                <input type="email" class="form-control" id="username" name="username" [(ngModel)]="user.username" required #username="ngModel">
+                <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                    <div *ngIf="username.errors.required">
+                        Email is required.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+                <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+                    Password is required.
+                </div>
+            </div>
+
+            <div *ngIf="errorCompany == true">
+                You don't have a pro account.
+            </div>
+
+            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-success">Login</button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="/register">Create a pro account</a>
+    </div>
+</ng-template>

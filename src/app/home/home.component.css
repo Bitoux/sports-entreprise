@@ -1,0 +1,160 @@
+#logo{
+    width: 74px;
+    display: block;
+}
+
+.black-nav{
+    background-color: #343a40;
+    border-radius: 0;
+}
+
+.bg-texture-black{
+    background: linear-gradient(-45deg,#fff 33%,transparent 0),linear-gradient(-45deg,#343a40 100%,transparent 0);
+}
+
+.text-black{
+    color: #343a40;
+}
+
+.icon-box{
+    background-color: #343a40;
+}
+
+.bg-basketball{
+    position: relative;
+    background: url('../../assets/img/basketball.jpg');
+    object-fit: cover;
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    padding: 0;
+}
+
+.bg-opacity{
+    background-color: rgba(0, 0, 0, 0.65);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-basketball .container{
+    padding: 80px 0;
+}
+
+.card-outline-black{
+    border-color: #343a40;
+}
+
+.border-bottom-black{
+    border-bottom: 1px solid #343a40;
+}
+
+.bg-texture-collage-black{
+    background: linear-gradient(-45deg,#ffb300 33%,transparent 0),linear-gradient(-45deg,#343a40 67%,transparent 0),linear-gradient(-45deg,#ffb300 100%,transparent 0)
+}
+
+.bg-black{
+    background-color: #343a40;
+}
+
+.btn-custom{
+    background: #ffb300;
+    color: #343a40;
+    font-weight: 600;
+    border: 2px solid #343a40;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-custom:hover{
+    color: #ffb300;
+    border-color: #ffb300;
+    border-radius: 17.5px;
+    background: #343a40;
+}
+
+.modal-header{
+    font-family: Catamaran,sans-serif;
+    font-weight: 600;
+    color: #343a40;
+    background: white;
+    border-bottom: 1px solid #343a40;
+    padding: 25px;
+}
+
+.modal-header h4{
+    font-size: 20px;
+}
+
+label{
+    color: #343a40;
+    font-family: Catamaran,sans-serif;
+    font-weight: 500;
+}
+
+.form-control{
+    border: 0;
+    border-bottom: 1px solid #343a40;
+    border-radius: 0;
+    background: white;
+    box-shadow: none;
+    font-family: Catamaran,sans-serif;
+    font-size: 16px;
+}
+
+.form-group + .form-group{
+    margin-top: 15px;
+}
+
+.form-control:focus{
+    border-color: #ffb300;
+}
+
+button[type="submit"]{
+    display: block;
+    appearance: none;
+    border: 2px solid #343a40;
+    height: 50px;
+    max-width: 200px;
+    width: 100%;
+    background: #ffb300;
+    font-family: Catamaran,sans-serif;
+    color: #343a40;
+    font-weight: 600;
+    border-radius: 25px;
+    margin: 15px auto;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover{
+    background: #343a40;
+    border-color: #ffb300;
+    color: #ffb300;
+}
+
+.modal-footer{
+    border-top: 1px solid #343a40;
+    background: white;
+}
+
+.modal-footer a{
+    display: block;
+    height: 50px;
+    background: #343a40;
+    font-family: Catamaran,sans-serif;
+    font-weight: 600;
+    color: white;
+    width: 170px;
+    text-align: center;
+    line-height: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-footer a:hover{
+    background-color: black;
+}
+
+.alert-danger{
+    background: white;
+    border: 0;
+}

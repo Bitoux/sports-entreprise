@@ -1,0 +1,126 @@
+.card{
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.main-container{
+    padding: 80px 15px;
+    background: url('/assets/img/register_bg.jpg');
+    background-size: cover;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.card-header{
+    font-family: Catamaran,sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #343a40;
+    background: white;
+    border-bottom: 1px solid #343a40;
+    padding: 25px;
+}
+
+.card-body{
+    padding: 25px;
+}
+
+label{
+    color: #343a40;
+    font-family: Catamaran,sans-serif;
+    font-weight: 500;
+}
+
+select.form-control{
+    height: auto;
+}
+
+input[type="checkbox"].form-control{
+    display: inline-block;
+    width: 20px;
+    appearance: none;
+    border: 1px solid #343a40;
+    height: 20px;
+    position: relative;
+    outline: none;
+    transition: background 0.3s ease-in-out;
+}
+
+input[type="checkbox"].form-control + label{
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 15px;
+}
+
+input[type="checkbox"].form-control:checked{
+    background-color: #ffb300;
+}
+
+.form-control{
+    border: 0;
+    border-bottom: 1px solid #343a40;
+    border-radius: 0;
+    background: white;
+    box-shadow: none;
+    font-family: Catamaran,sans-serif;
+    font-size: 16px;
+}
+
+.form-group + .form-group{
+    margin-top: 15px;
+}
+
+.form-control:focus{
+    border-color: #ffb300;
+}
+
+.alert-danger{
+    background: white;
+    border: 0;
+}
+
+button[type="submit"]{
+    display: block;
+    appearance: none;
+    border: 2px solid #343a40;
+    height: 50px;
+    max-width: 200px;
+    width: 100%;
+    background: #ffb300;
+    font-family: Catamaran,sans-serif;
+    color: #343a40;
+    font-weight: 600;
+    border-radius: 25px;
+    margin: 15px auto;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover{
+    background: #343a40;
+    border-color: #ffb300;
+    color: #ffb300;
+}
+
+.card-footer{
+    border-top: 1px solid #343a40;
+    background: white;
+}
+
+.card-footer a{
+    display: block;
+    height: 50px;
+    background: #343a40;
+    font-family: Catamaran,sans-serif;
+    font-weight: 600;
+    color: white;
+    width: 150px;
+    text-align: center;
+    line-height: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-footer a:hover{
+    background-color: black;
+}
