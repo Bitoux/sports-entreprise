@@ -19,27 +19,44 @@ export class SpecialEventsComponent implements OnInit {
 
   ngOnInit() {
     this.initTest();
+
+    this.paymentCheck();
+    
   }
 
   initTest(){
-    let paramID = this.route.snapshot.paramMap.get('id');
     this.user = this.storage.retrieve('user');
-    console.log('user', this.user);
     if(this.user){
-      if( paramID == this.user.id ){
-        console.log('ok');
-      }else{
-        console.log('not ok');
-        this.router.navigate(['/']);
-      }
+      console.log('ok');
     }else{
       console.log('no user');
       this.router.navigate(['/']);
     }
   }
 
+
+
   getSpecialEvent(){
       
+  }
+
+  goCreateEvent(){
+    console.log('create event');
+    this.router.navigate(['/events/create', { id: this.user.id }])
+  }
+
+  paymentCheck(){
+    if(this.user.company.payments.length === 0){
+      this.router.navigate(['/payment', { id: this.user.id }]);
+    }else{
+      let last_pay = this.user.company.payments[this.user.company.payments.length -1].date;
+      last_pay = new Date(last_pay);
+      last_pay.setMonth(last_pay.getMonth() + 1);
+      let today = new Date();
+      if(last_pay <= today){
+        this.router.navigate(['/payment', { id: this.user.id }]);
+      }
+    }
   }
 
 }

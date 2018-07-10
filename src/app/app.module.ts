@@ -6,6 +6,7 @@ import { Http, HttpModule, RequestOptions } from '@angular/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { AuthHttp } from 'angular2-jwt';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { SpecialEventsComponent } from './dashboard/special-events/special-events.component';
 import { PaymentComponent } from './payment/payment.component';
+import { EventCreateComponent } from './dashboard/event-create/event-create.component';
 
 
 
@@ -32,7 +34,9 @@ import { PaymentComponent } from './payment/payment.component';
     DashboardComponent,
     SidebarComponent,
     SpecialEventsComponent,
-    PaymentComponent
+    PaymentComponent,
+    EventCreateComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
