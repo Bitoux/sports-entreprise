@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-special-events',
@@ -11,12 +13,15 @@ import { HttpService } from '../../shared/provider/http.service';
 })
 export class SpecialEventsComponent implements OnInit {
   user: any;
+  events: any;
+  modalRef: BsModalRef;
+  eventToDelete: any;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private storage: LocalStorageService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -26,6 +31,15 @@ export class SpecialEventsComponent implements OnInit {
 
     this.getSpecialEvent();
     
+  }
+
+  openModal(template, event) {
+    this.modalRef = this.modalService.show(template);
+    this.eventToDelete = event;
+  }
+
+  closeModal() {
+    this.modalRef.hide();
   }
 
   initTest(){
@@ -43,27 +57,40 @@ export class SpecialEventsComponent implements OnInit {
   getSpecialEvent(){
       this.httpService.get('/api/proevents')
       .subscribe(data => {
-        console.log(data);
+        this.events = data;
       });
   }
 
   goCreateEvent(){
     console.log('create event');
-    this.router.navigate(['/events/create', { id: this.user.id }])
+    this.router.navigate(['/dashboard/events/create'])
   }
 
   paymentCheck(){
     if(this.user.company.payments.length === 0){
-      this.router.navigate(['/payment', { id: this.user.id }]);
+      this.router.navigate(['/payment']);
     }else{
       let last_pay = this.user.company.payments[this.user.company.payments.length -1].date;
       last_pay = new Date(last_pay);
       last_pay.setMonth(last_pay.getMonth() + 1);
       let today = new Date();
       if(last_pay <= today){
-        this.router.navigate(['/payment', { id: this.user.id }]);
+        this.router.navigate(['/payment']);
       }
     }
+  }
+
+  deleteEvent(){
+    console.log(this.eventToDelete.id);
+    this.httpService.delete('/api/proevents/' + this.eventToDelete.id + '/delete')
+    .subscribe(data => {
+      console.log(data);
+      this.closeModal();
+    });
+  }
+
+  editEvent(event){
+    this.router.navigate(['/dashboard/events/' + event.id]);
   }
 
 }

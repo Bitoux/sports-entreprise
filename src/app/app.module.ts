@@ -15,11 +15,11 @@ import { RegisterComponent } from './register/register.component';
 import { CompareValidatorDirective } from './shared/compare-validator.directive';
 import { AuthentificationService } from './shared/authentification.service';
 import { authHttpServiceFactory, HttpService } from "./shared/provider/http.service";
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { SpecialEventsComponent } from './dashboard/special-events/special-events.component';
 import { PaymentComponent } from './payment/payment.component';
 import { EventCreateComponent } from './dashboard/event-create/event-create.component';
+import { EventEditComponent } from './dashboard/event-edit/event-edit.component';
 
 
 
@@ -30,11 +30,11 @@ import { EventCreateComponent } from './dashboard/event-create/event-create.comp
     MenuComponent,
     RegisterComponent,
     CompareValidatorDirective,
-    DashboardComponent,
     SidebarComponent,
     SpecialEventsComponent,
     PaymentComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    EventEditComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
     private modalService: BsModalService,
     private authentification: AuthentificationService,
     private httpService: HttpService,
-    private route: ActivatedRoute,
     private router: Router,
     private storage: LocalStorageService
     ) { }
@@ -65,7 +64,7 @@ export class HomeComponent implements OnInit {
   }
 
   redirectToDashBoard(id){
-    this.router.navigate(['/dashboard', { id: id }]);
+    this.router.navigate(['/dashboard/events', { id: id }]);
   }
 
 }
