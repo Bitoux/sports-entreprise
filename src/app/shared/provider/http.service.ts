@@ -47,4 +47,12 @@ export class HttpService {
         console.log('post done!')
       });
   }
+
+  uploadSpeEventPicture(file){
+    let options = {
+      url: "http://localhost:8000/api/speevent/upload",
+      headers: { "Authorization": "Bearer " + storage.retrieve('id_token'), "Accept" : "application/json" },
+      params: { "param1": "val1", "param2": "val2" }
+    };
+  }
 }

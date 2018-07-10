@@ -55,12 +55,7 @@
 
       <div class="form-group">
         <label for="img">Event image *</label>
-        <input type="file" class="form-control" id="img" name="img" [(ngModel)]="event.img" #img="ngModel" ng2FileSelect [uploader]="uploader"  required>
-        <button type="button" class="btn btn-success btn-s" 
-            (click)="uploader.uploadAll()" 
-            [disabled]="!uploader.getNotUploadedItems().length" >
-                Upload an Image
-        </button>
+        <input type="file" class="form-control" (change)="handleFileInput($event.target.files)" accept="image/*" id="img" name="img" [(ngModel)]="event.img" #img="ngModel"  required>
         <div *ngIf="img.invalid && (img.dirty || img.touched)" class="alert alert-danger">
             <div *ngIf="img.errors.required">
                 Image is required.
@@ -69,8 +64,6 @@
       </div>
 
       <button type="submit">Create</button>
-
-
 
     </form>
   </div>

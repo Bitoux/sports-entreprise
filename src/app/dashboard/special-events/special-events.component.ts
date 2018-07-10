@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
+import { HttpService } from '../../shared/provider/http.service';
 
 @Component({
   selector: 'app-special-events',
@@ -14,13 +15,16 @@ export class SpecialEventsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private httpService: HttpService
   ) { }
 
   ngOnInit() {
     this.initTest();
 
     this.paymentCheck();
+
+    this.getSpecialEvent();
     
   }
 
@@ -37,7 +41,10 @@ export class SpecialEventsComponent implements OnInit {
 
 
   getSpecialEvent(){
-      
+      this.httpService.get('/api/proevents')
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
   goCreateEvent(){

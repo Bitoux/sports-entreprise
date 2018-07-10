@@ -2,7 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
-import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { HttpService } from '../../shared/provider/http.service';
+
 
 declare var google;
 
@@ -21,13 +22,15 @@ export class EventCreateComponent implements OnInit {
   event: any;
   lat: string;
   lng: string;
-  uploader: FileUploader;
-
+  file: any;
+  options: any;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private storage: LocalStorageService,
     private zone: NgZone,
+    private httpService: HttpService
   ) {
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -39,7 +42,6 @@ export class EventCreateComponent implements OnInit {
     this.initTest();
     this.paymentCheck();
     this.event = {};
-    this.initUploader();
   }
 
   initTest(){
@@ -105,25 +107,49 @@ export class EventCreateComponent implements OnInit {
     let event = {
       name: this.event.name,
       description: this.event.description,
-      address: this.event.address,
+      address: this.autocomplete.query,
       lat: this.lat,
       lng: this.lng,
       date: this.event.date,
       hour: this.event.time,
-      img: this.event.img
+      img: this.file,
+      company: this.user.company.id
     };
+    let fd = new FormData();
+    fd.append('name', event.name);
+    fd.append('description', event.description);
+    fd.append('address', event.address);
+    fd.append('lat', event.lat);
+    fd.append('lng', event.lng);
+    fd.append('date', event.date);
+    fd.append('hour', event.hour);
+    fd.append('img', event.img);
+    fd.append('company', event.company);
+
+    
     console.log(event);
+    this.httpService.post('/api/proevents/create', fd)
+    .subscribe(data => {
+      console.log(data);
+    });
+    
   }
 
-  initUploader(){
-    this.uploader = new FileUploader({
-      url: 'http://localhost:8000/company/upload',
-      itemAlias: 'photos'
-    });
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('ImageUpload:uploaded:', item, status, response);
-      alert('File uploaded successfully');
-    };
+  handleFileInput(files: FileList) {
+    this.file = files.item(0);
+    console.log(this.file);
   }
+
+  /*uploadPicture(){
+    this.file = this.event.img // Array of file objects
+    this.options = {
+      url: "http://localhost:8000/api/speevent/upload",
+      headers: { "Authorization": "Bearer asd", "Accept" : "something" },
+      params: { "param1": "val1", "param2": "val2" }
+    };
+    this.uploader.setOptions(this.options); // Global options applied for each upload
+    this.uploader.addFiles(this.file);
+    this.uploader.uploadAll();
+  }*/
 
 }
