@@ -55,15 +55,16 @@ export class SpecialEventsComponent implements OnInit {
 
 
   getSpecialEvent(){
-      this.httpService.get('/api/proevents')
-      .subscribe(data => {
-        this.events = data;
-      });
+    console.log(this.user.company.id);
+    this.httpService.get('/api/proevents/' + this.user.company.id)
+    .subscribe(data => {
+      this.events = data;
+    });
   }
 
   goCreateEvent(){
     console.log('create event');
-    this.router.navigate(['/dashboard/events/create'])
+    this.router.navigate(['/dashboard/create/events'])
   }
 
   paymentCheck(){

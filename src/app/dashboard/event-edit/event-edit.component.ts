@@ -11,6 +11,7 @@ import { HttpService } from '../../shared/provider/http.service';
 })
 export class EventEditComponent implements OnInit {
   user: any;
+  proEvent: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,6 +21,12 @@ export class EventEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initTest();
+
+    this.paymentCheck();
+
+    this.getEvent();
+    
   }
 
   initTest(){
@@ -45,5 +52,26 @@ export class EventEditComponent implements OnInit {
       }
     }
   }
+
+  getEvent(){
+    let id = this.route.snapshot.paramMap.get('id');
+    this.httpService.get('/api/proevents/' + id + '/single')
+    .subscribe(data => {
+      this.proEvent = data;
+      if(this.proEvent !== 'KO'){
+        this.checkProEvent();
+      }else{
+        this.router.navigate(['/dashboard/events']);
+      }
+    });
+  }
+
+  checkProEvent(){
+    if(this.proEvent.company.id !== this.user.company.id){
+      this.router.navigate(['/dashboard/events']);
+    }
+  }
+
+  //TODO EDIT 
 
 }

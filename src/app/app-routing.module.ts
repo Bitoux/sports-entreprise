@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'dashboard/payment', component: PaymentComponent },
   { path: 'dashboard/events', component: SpecialEventsComponent },
   { path: 'dashboard/events/:id', component: EventEditComponent },
-  { path: 'dashboard/events/create', component: EventCreateComponent }
+  { path: 'dashboard/create/events', component: EventCreateComponent }
 ];
 
 @NgModule({
