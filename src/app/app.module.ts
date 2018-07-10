@@ -19,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { SpecialEventsComponent } from './dashboard/special-events/special-events.component';
 import { PaymentComponent } from './payment/payment.component';
+import { EventCreateComponent } from './dashboard/event-create/event-create.component';
 
 
 
@@ -32,7 +33,8 @@ import { PaymentComponent } from './payment/payment.component';
     DashboardComponent,
     SidebarComponent,
     SpecialEventsComponent,
-    PaymentComponent
+    PaymentComponent,
+    EventCreateComponent
   ],
   imports: [
     BrowserModule,

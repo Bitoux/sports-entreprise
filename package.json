@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^2.2.0",
     "angular2-jwt": "^0.2.3",
     "core-js": "^2.5.4",
+    "ng-uploader": "^2.0.9",
     "ngx-bootstrap": "^3.0.1",
     "ngx-paypal": "^3.0.0",
     "ngx-webstorage": "^2.0.1",
