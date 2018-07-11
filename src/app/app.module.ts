@@ -20,6 +20,8 @@ import { SpecialEventsComponent } from './dashboard/special-events/special-event
 import { PaymentComponent } from './payment/payment.component';
 import { EventCreateComponent } from './dashboard/event-create/event-create.component';
 import { EventEditComponent } from './dashboard/event-edit/event-edit.component';
+import { BillsComponent } from './dashboard/bills/bills.component';
+import { EditAccountComponent } from './dashboard/edit-account/edit-account.component';
 
 
 
@@ -34,7 +36,9 @@ import { EventEditComponent } from './dashboard/event-edit/event-edit.component'
     SpecialEventsComponent,
     PaymentComponent,
     EventCreateComponent,
-    EventEditComponent
+    EventEditComponent,
+    BillsComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,

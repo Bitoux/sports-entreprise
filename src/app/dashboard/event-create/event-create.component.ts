@@ -1,6 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 
@@ -23,7 +22,6 @@ export class EventCreateComponent implements OnInit {
   lat: string;
   lng: string;
   file: any;
-  options: any;
   
   constructor(
     private route: ActivatedRoute,
@@ -131,6 +129,9 @@ export class EventCreateComponent implements OnInit {
     this.httpService.post('/api/proevents/create', fd)
     .subscribe(data => {
       console.log(data);
+      this.user = data;
+      this.storage.clear('user');
+      this.storage.store('user', this.user);
     });
     
   }
@@ -140,16 +141,5 @@ export class EventCreateComponent implements OnInit {
     console.log(this.file);
   }
 
-  /*uploadPicture(){
-    this.file = this.event.img // Array of file objects
-    this.options = {
-      url: "http://localhost:8000/api/speevent/upload",
-      headers: { "Authorization": "Bearer asd", "Accept" : "something" },
-      params: { "param1": "val1", "param2": "val2" }
-    };
-    this.uploader.setOptions(this.options); // Global options applied for each upload
-    this.uploader.addFiles(this.file);
-    this.uploader.uploadAll();
-  }*/
 
 }

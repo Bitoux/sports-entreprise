@@ -56,7 +56,7 @@ export class SpecialEventsComponent implements OnInit {
 
   getSpecialEvent(){
     console.log(this.user.company.id);
-    this.httpService.get('/api/proevents/' + this.user.company.id)
+    this.httpService.get('/api/company/' + this.user.company.id + '/proevents')
     .subscribe(data => {
       this.events = data;
     });

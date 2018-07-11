@@ -1,0 +1,18 @@
+<app-sidebar></app-sidebar>
+<div class="main-container">
+  <div class="bills-container">
+      <ul class="list-group">
+          <li class="list-group-item" *ngFor="let bill of bills">
+            <div class="date">
+              {{bill.date}}
+            </div>
+            <div class="order">
+              {{bill.order_id}}
+            </div>
+            <div class="amount">
+              {{bill.amount}} €
+            </div>
+          </li>
+      </ul>
+  </div>
+</div>
