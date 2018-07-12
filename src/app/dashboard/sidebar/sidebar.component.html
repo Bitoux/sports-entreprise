@@ -1,20 +1,20 @@
 <div class="sidebar">
   <div class="container-top">
-    <h4>Username</h4>  
+    <h4>{{user.username}}</h4>  
   </div>
   <div class="nav">
     <ul>
       <li>
-        <a href="/dashboard/events">Your events</a>
+        <a href="/dashboard/events"><i class="material-icons dp18">event_note</i> Your events</a>
       </li>
       <li>
-        <a href="/dashboard/account">Edit account</a>
+        <a href="/dashboard/bills"><i class="material-icons dp18">credit_card</i> My bills</a>
       </li>
       <li>
-        <a href="/dashboard/bills">My bills</a>
+        <a href="/dashboard/account"><i class="material-icons dp18">account_box</i> Edit account</a>
       </li>
       <li>
-        <p (click)="logout()">Logout</p>
+        <p (click)="logout()"><i class="material-icons dp18">exit_to_app</i> Logout</p>
       </li>
     </ul>
   </div>

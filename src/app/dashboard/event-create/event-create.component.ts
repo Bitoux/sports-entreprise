@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
@@ -12,15 +12,24 @@ declare var google;
   styleUrls: ['./event-create.component.css']
 })
 export class EventCreateComponent implements OnInit {
-  user: any;
+
+  // GOOGLE
+  @ViewChild('mapGoogle') mapElement: ElementRef;
   service = new google.maps.places.AutocompleteService();
   geocoder = new google.maps.Geocoder();
   autocompleteItems;
   autocomplete;
   showAddressList: boolean = false;
-  event: any;
   lat: string;
   lng: string;
+  mapGoogle: any;
+  marker: any;
+
+  // PAGE
+  user: any;
+  event: any;
+  
+  // FILE
   file: any;
   
   constructor(
@@ -37,9 +46,10 @@ export class EventCreateComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.event = {};
+
     this.initTest();
     this.paymentCheck();
-    this.event = {};
   }
 
   initTest(){
@@ -96,6 +106,8 @@ export class EventCreateComponent implements OnInit {
           me.autocomplete.query = results[0].formatted_address;
           me.lat = results[0].geometry.location.lat();
           me.lng = results[0].geometry.location.lng();
+          let latLng = new google.maps.LatLng(me.lat, me.lng);
+          me.loadMap(latLng);
         }
       }
     });
@@ -139,6 +151,31 @@ export class EventCreateComponent implements OnInit {
   handleFileInput(files: FileList) {
     this.file = files.item(0);
     console.log(this.file);
+  }
+
+  loadMap(latLng){
+    let mapOptions = {
+      center: latLng,
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.mapGoogle = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.addMarker(latLng);
+  }
+
+  addMarker(latLng){
+    this.marker = new google.maps.Marker({
+      map: this.mapGoogle,
+      animation: google.maps.Animation.DROP,
+      position: latLng
+    });
+    let content = this.event.name;
+    this.addInfoWindow(this.marker, content);
+  }
+
+  addInfoWindow(marker, content){
+    let infoWindow = new google.maps.InfoWindow({ content: content });
+    google.maps.event.addListener(marker, 'click', () => { infoWindow.open(this.mapGoogle, marker); });
   }
 
 

@@ -1,8 +1,23 @@
 <app-sidebar></app-sidebar>
 <div class="main-container">
+  <h1>Your bills</h1>
   <div class="bills-container">
-      <ul class="list-group">
-          <li class="list-group-item" *ngFor="let bill of bills">
+      <ul class="list">
+          <li class="list-item header" *ngFor="let bill of bills">
+            <div class="date">
+                Date
+              </div>
+              <div class="order">
+                Order
+              </div>
+              <div class="amount">
+                Amount (€) 
+              </div>
+              <div class="amount">
+                PDF Download 
+              </div>
+          </li>
+          <li class="list-item" *ngFor="let bill of bills">
             <div class="date">
               {{bill.date}}
             </div>
@@ -11,6 +26,9 @@
             </div>
             <div class="amount">
               {{bill.amount}} €
+            </div>
+            <div class="lien">
+              <a target="_blank" href="www.google.fr">Download your bills</a>
             </div>
           </li>
       </ul>

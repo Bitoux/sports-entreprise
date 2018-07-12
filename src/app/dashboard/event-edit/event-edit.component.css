@@ -1,0 +1,112 @@
+.main-container{
+    padding: 20px;
+}
+
+.form-container{
+    max-width: 750px;
+    margin: 50px auto 0;
+}
+
+.form-group{
+    margin-top: 30px;
+    position: relative;
+}
+
+.form-control{
+    border: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ffb300;
+    font-size: 16px;
+    color: #343a40;
+    border-radius: 0;
+}
+
+textarea.form-control{
+    resize: none;
+    height: 350px;
+    border: 1px solid #ffb300;
+}
+
+.list-group.addresses-list{
+    position: absolute;
+    width: 100%;
+    top: 62px;
+    left: 0;
+    z-index: 9;
+    background-color: white;
+}
+
+.list-group.addresses-list .list-group-item{
+    border-radius: 0;
+    border-color: #ffb300;
+}
+
+#map{
+    height: 350px;
+}
+
+.file-container{
+    margin-top: 20px;
+}
+
+.file-container .image-container{
+    display: inline-block;
+    width: 250px;
+}
+
+.file-container .image-container p{
+    color: #343a40;
+    font-style: italic;
+}
+
+.file-container .image-container img{
+    display: block;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.file-container .form-group{
+    display: inline-block;
+    width: calc(100% - 250px);
+    vertical-align: bottom;
+    margin-bottom: 0;
+    padding-right: 20px;
+}
+
+.file-container .form-control{
+    padding-left: 0;
+}
+
+button[type="submit"]{
+    display: block;
+    width: 150px;
+    height: 50px;
+    margin-left: auto;
+    margin-top: 40px;
+    border: 2px solid #ffb300;
+    background-color: #343a40;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 25px;
+    transition: all ease-in-out 0.3s;
+}
+
+button[type="submit"]:hover{
+    border-color: #343a40;
+    background-color: #ffb300;
+    color: #343a40;
+}
+
+.bottom-container a{
+    margin-top: 30px;
+    display: block;
+    background-color: black;
+    width: 200px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    height: 50px;
+    line-height: 50px;
+}

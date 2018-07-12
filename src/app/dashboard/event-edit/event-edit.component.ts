@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
@@ -11,8 +11,9 @@ declare var google;
   styleUrls: ['./event-edit.component.css']
 })
 export class EventEditComponent implements OnInit {
-  user: any;
-  event: any;
+
+  //GOOGLE
+  @ViewChild('mapGoogle') mapElement: ElementRef;
   service = new google.maps.places.AutocompleteService();
   geocoder = new google.maps.Geocoder();
   autocompleteItems;
@@ -20,8 +21,17 @@ export class EventEditComponent implements OnInit {
   showAddressList: boolean = false;
   lat: string;
   lng: string;
+  mapGoogle: any;
+  marker: any;
+
+  //PAGE
+  user: any;
+  event: any;
+  
+  // FILE
   file: any;
   changedFile: boolean;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -78,7 +88,7 @@ export class EventEditComponent implements OnInit {
       if(this.event !== 'KO'){
         this.checkProEvent();
         this.autocomplete.query = this.event.address;
-        console.log(this.event);
+        this.loadMap();
       }else{
         this.router.navigate(['/dashboard/events']);
       }
@@ -121,6 +131,10 @@ export class EventEditComponent implements OnInit {
           me.autocomplete.query = results[0].formatted_address;
           me.lat = results[0].geometry.location.lat();
           me.lng = results[0].geometry.location.lng();
+          me.deleteMarker();
+          let latLng = new google.maps.LatLng(me.lat, me.lng);
+          me.addMarker(latLng);
+          me.mapGoogle.setCenter(latLng);
         }
       }
     });
@@ -173,6 +187,34 @@ export class EventEditComponent implements OnInit {
     });
   }
 
-  //TODO EDIT 
+  loadMap(){
+    let latLng = new google.maps.LatLng(this.event.latitude, this.event.longitude);
+    let mapOptions = {
+      center: latLng,
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.mapGoogle = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.addMarker(latLng);
+  }
+
+  addMarker(latLng){
+    this.marker = new google.maps.Marker({
+      map: this.mapGoogle,
+      animation: google.maps.Animation.DROP,
+      position: latLng
+    });
+    let content = this.event.name;
+    this.addInfoWindow(this.marker, content);
+  }
+
+  addInfoWindow(marker, content){
+    let infoWindow = new google.maps.InfoWindow({ content: content });
+    google.maps.event.addListener(marker, 'click', () => { infoWindow.open(this.mapGoogle, marker); });
+  }
+
+  deleteMarker(){
+    this.marker.setMap(null);
+  }
 
 }

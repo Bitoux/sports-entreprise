@@ -1,0 +1,35 @@
+.main-container{
+    padding: 20px;
+}
+
+.bills-container .list{
+    list-style-type: none;
+    margin-top: 50px;
+}
+
+.bills-container .list .list-item{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #343a40;
+}
+
+.bills-container .list .list-item div{
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+.bills-container .list .list-item.header{
+    font-size: 18px;
+    font-weight: 600;
+    color: #343a40;
+    border-bottom: 1px solid #ffb300;
+}
+
+.bills-container .list .list-item div a{
+    color: #ffb300;
+}
+
+.bills-container .list .list-item div a:hover{
+    text-decoration: underline;
+}
