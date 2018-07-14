@@ -12,6 +12,8 @@ import { HttpService } from '../shared/provider/http.service';
 export class PaymentComponent implements OnInit {
   user: any;
   public payPalConfig?: PayPalConfig;
+  successPayment: boolean;
+  errorPayment: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,21 +23,17 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.successPayment = false;
+    this.errorPayment = false;
+
     this.initTest();
     this.initConfig();
   }
 
   initTest(){
-    let paramID = this.route.snapshot.paramMap.get('id');
     this.user = this.storage.retrieve('user');
-    console.log('user', this.user);
     if(this.user){
-      if( paramID == this.user.id ){
-        console.log('ok');
-      }else{
-        console.log('not ok');
-        this.router.navigate(['/']);
-      }
+      console.log('ok');
     }else{
       console.log('no user');
       this.router.navigate(['/']);
@@ -53,17 +51,21 @@ export class PaymentComponent implements OnInit {
         },
         onPaymentComplete: (data, actions) => {
           this.savePayment(data);
+          this.successPayment = true;
+          this.errorPayment = false;
         },
         onCancel: (data, actions) => {
           console.log('OnCancel');
         },
         onError: (err) => {
           console.log('OnError', err);
+          this.errorPayment = true;
+          this.successPayment = false;
         },
         transactions: [{
           amount: {
             currency: 'EUR',
-            total: 9
+            total: 15
           }
         }]
       });
@@ -72,7 +74,7 @@ export class PaymentComponent implements OnInit {
     savePayment(data){
       let payment = {
         date: new Date(),
-        amount: 9,
+        amount: 15,
         company: this.user.company.id,
         order_id: data.orderID,
         payer_id: data.payerID,
@@ -83,7 +85,6 @@ export class PaymentComponent implements OnInit {
       console.log(payment);
       this.httpService.post('/api/payments/add', payment)
       .subscribe(data => {
-        console.log(data);
         this.user = data;
         this.storage.clear('user');
         this.storage.store('user', this.user);

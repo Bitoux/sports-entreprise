@@ -22,6 +22,9 @@ import { EventCreateComponent } from './dashboard/event-create/event-create.comp
 import { EventEditComponent } from './dashboard/event-edit/event-edit.component';
 import { BillsComponent } from './dashboard/bills/bills.component';
 import { EditAccountComponent } from './dashboard/edit-account/edit-account.component';
+import { ShopsComponent } from './dashboard/shops/shops.component';
+import { ShopsCreateComponent } from './dashboard/shops-create/shops-create.component';
+import { ShopsEditComponent } from './dashboard/shops-edit/shops-edit.component';
 
 
 
@@ -38,7 +41,10 @@ import { EditAccountComponent } from './dashboard/edit-account/edit-account.comp
     EventCreateComponent,
     EventEditComponent,
     BillsComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    ShopsComponent,
+    ShopsCreateComponent,
+    ShopsEditComponent
   ],
   imports: [
     BrowserModule,

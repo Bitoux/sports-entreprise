@@ -9,16 +9,22 @@ import { EventCreateComponent } from './dashboard/event-create/event-create.comp
 import { EventEditComponent } from './dashboard/event-edit/event-edit.component';
 import { BillsComponent } from './dashboard/bills/bills.component';
 import { EditAccountComponent } from './dashboard/edit-account/edit-account.component';
+import { ShopsComponent } from './dashboard/shops/shops.component';
+import { ShopsCreateComponent } from './dashboard/shops-create/shops-create.component';
+import { ShopsEditComponent } from './dashboard/shops-edit/shops-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard/payment', component: PaymentComponent },
   { path: 'dashboard/events', component: SpecialEventsComponent },
+  { path: 'dashboard/events/create', component: EventCreateComponent },
   { path: 'dashboard/events/:id', component: EventEditComponent },
-  { path: 'dashboard/create/events', component: EventCreateComponent },
   { path: 'dashboard/bills', component: BillsComponent },
-  { path: 'dashboard/account', component: EditAccountComponent }
+  { path: 'dashboard/account', component: EditAccountComponent },
+  { path: 'dashboard/shops', component: ShopsComponent },
+  { path: 'dashboard/shops/create', component: ShopsCreateComponent },
+  { path: 'dashboard/shops/:id', component: ShopsEditComponent }
 ];
 
 @NgModule({

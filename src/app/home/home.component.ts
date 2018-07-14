@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   modalRef: BsModalRef;
   user: any;
   errorCompany: boolean;
+  gotUser: boolean;
 
   constructor(
     private modalService: BsModalService,
@@ -27,8 +28,15 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.user = {};
     this.errorCompany = false;
+    this.user = this.storage.retrieve('user');
+    console.log(this.user);
+    if(this.user){
+      this.gotUser = true;
+    }else{
+      this.gotUser = false;
+      this.user = {};
+    }
   }
 
   openModal(template) {
@@ -54,7 +62,7 @@ export class HomeComponent implements OnInit {
           console.log('has company');
           this.closeModal();
           this.storage.store('user', this.user);
-          this.redirectToDashBoard(this.user.id);
+          this.redirectToDashBoard();
         }else {
           console.log('NO company');
           this.errorCompany = true;
@@ -63,8 +71,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  redirectToDashBoard(id){
-    this.router.navigate(['/dashboard/events', { id: id }]);
+  redirectToDashBoard(){
+    this.router.navigate(['/dashboard/events']);
   }
+  
 
 }

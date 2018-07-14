@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-edit-account',
@@ -9,21 +11,33 @@ import { HttpService } from '../../shared/provider/http.service';
   styleUrls: ['./edit-account.component.css']
 })
 export class EditAccountComponent implements OnInit {
+  
+  // PAGE
   user: any;
-  file: any;
-  changedFile: boolean;
   countries: any;
+  modalRef: BsModalRef;
+  errorRegister: boolean;
+  
+  // FILE
+  file: any;
+  pinMap: any;
+  changedFile: boolean;
+  changedPin: boolean;
+  
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private httpService: HttpService,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
     this.changedFile = false;
+    this.changedPin = false;
     this.user = {};
+    this.errorRegister = false;
     this.countries = [
       'France',
       'United Kingdom',
@@ -35,7 +49,6 @@ export class EditAccountComponent implements OnInit {
     this.initTest();
     this.paymentCheck();
     console.log(this.user);
-    //this.getUser();
   }
 
   initTest(){
@@ -71,13 +84,20 @@ export class EditAccountComponent implements OnInit {
     });
   }
 
-  handleFileInput(files: FileList) {
-    this.file = files.item(0);
-    this.changedFile = true;
+  handleFileInput(files: FileList, string) {
+    if(string == 'picture'){
+      this.file = files.item(0);
+      this.changedFile = true;
+    }else{
+      this.pinMap = files.item(0);
+      this.changedPin = true;
+    }
+    
     console.log(this.file);
+    console.log(this.pinMap);
   }
 
-  updateAccount(){
+  updateAccount(template){
     console.log(this.user);
     let user = {
       id: this.user.id,
@@ -86,10 +106,14 @@ export class EditAccountComponent implements OnInit {
       address: this.user.adress,
       city: this.user.city,
       country: this.user.country,
-      picture: this.user.picture
+      picture: this.user.picture,
+      pinMap: this.user.pinMap
     }
     if(this.changedFile){
       user.picture = this.file;
+    }
+    if(this.changedPin){
+      user.pinMap = this.pinMap;
     }
 
     let fd = new FormData();
@@ -102,14 +126,32 @@ export class EditAccountComponent implements OnInit {
     fd.append('country', user.country);
     fd.append('picture', user.picture);
     fd.append('changed', this.changedFile.toString());
+    fd.append('pinMap', user.pinMap);
+    fd.append('changedPin', this.changedPin.toString());
 
     this.httpService.post('/api/user/company/edit', fd)
     .subscribe(data => {
       this.user = data;
       this.storage.clear('user');
       this.storage.store('user', this.user);
+      this.openModal(template)
+    }, error => {
+      this.errorRegister = true;
     });
     
+  }
+
+  openModal(template) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal() {
+    this.modalRef.hide();
+  }
+
+  goDashboard(){
+    this.closeModal();
+    this.router.navigate(['/dashboard/event']);
   }
 
 }

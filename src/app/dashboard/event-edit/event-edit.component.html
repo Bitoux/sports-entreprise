@@ -2,7 +2,7 @@
 <div class="main-container">
   <h1>Edit your event</h1>
   <div class="form-container">
-    <form #eventCreateForm="ngForm" (submit)="saveEvent()">
+    <form #eventCreateForm="ngForm" (submit)="saveEvent(template)">
 
       <div class="form-group">
         <label for="name">Event name *</label>
@@ -58,28 +58,26 @@
         </div>
       </div>
 
-      <div class="file-container">
-        <div class="form-group">
-          <label for="picture">Event image *</label>
-          <input type="file" class="form-control" (change)="handleFileInput($event.target.files)" accept="image/*" id="img" name="img"
-            [(ngModel)]="event.img" #img="ngModel" required>
-          <div *ngIf="img.invalid && (img.dirty || img.touched)" class="alert alert-danger">
-            <div *ngIf="img.errors.required">
-              Image is required.
-            </div>
-          </div>
-        </div>
-        <div class="image-container">
-          <p>Choose an image with square dimensions ( 50x50 / 150/150 ... )</p>
-          <img src="http://localhost:8000/uploads/company/{{event.picture}}" alt="">
-        </div>
-      </div>
-
-      <button type="submit">Create</button>
+      <button type="submit">Update</button>
 
     </form>
+    <p class="error" *ngIf="errorRegister == true">An error occured, please try again.</p>
   </div>
   <div class="bottom-container">
     <a href="/dashboard/events">Return to events</a>
   </div>
 </div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Your event has been created !</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Go back to your events page.</p>
+  
+      <button (click)="goEvents()" class="back">Back to Events</button>
+    </div>
+  </ng-template>

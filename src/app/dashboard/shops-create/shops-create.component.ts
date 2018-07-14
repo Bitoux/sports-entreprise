@@ -5,15 +5,14 @@ import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-
 declare var google;
 
 @Component({
-  selector: 'app-event-create',
-  templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.css']
+  selector: 'app-shops-create',
+  templateUrl: './shops-create.component.html',
+  styleUrls: ['./shops-create.component.css']
 })
-export class EventCreateComponent implements OnInit {
+export class ShopsCreateComponent implements OnInit {
 
   // GOOGLE
   @ViewChild('mapGoogle') mapElement: ElementRef;
@@ -28,12 +27,12 @@ export class EventCreateComponent implements OnInit {
   marker: any;
 
   // PAGE
+  spot: any;
   user: any;
-  event: any;
   modalRef: BsModalRef;
   errorRegister: boolean;
-  
-  
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -41,7 +40,7 @@ export class EventCreateComponent implements OnInit {
     private zone: NgZone,
     private httpService: HttpService,
     private modalService: BsModalService
-  ) {
+  ) { 
     this.autocompleteItems = [];
     this.autocomplete = {
       query: ''
@@ -49,7 +48,7 @@ export class EventCreateComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.event = {};
+    this.spot = {};
     this.errorRegister = false;
 
     this.initTest();
@@ -117,33 +116,6 @@ export class EventCreateComponent implements OnInit {
     });
   }
 
-  saveEvent(template){
-    let event = {
-      name: this.event.name,
-      description: this.event.description,
-      address: this.autocomplete.query,
-      lat: this.lat,
-      lng: this.lng,
-      date: this.event.date,
-      hour: this.event.time,
-      company: this.user.company.id
-    };
-
-    
-    console.log(event);
-    this.httpService.post('/api/proevents/create', event)
-    .subscribe(data => {
-      console.log(data);
-      this.user = data;
-      this.storage.clear('user');
-      this.storage.store('user', this.user);
-      this.openModal(template)
-    }, error => {
-      this.errorRegister = true;
-    });
-    
-  }
-
   loadMap(latLng){
     let mapOptions = {
       center: latLng,
@@ -160,13 +132,34 @@ export class EventCreateComponent implements OnInit {
       animation: google.maps.Animation.DROP,
       position: latLng
     });
-    let content = this.event.name;
+    let content = this.spot.name;
     this.addInfoWindow(this.marker, content);
   }
 
   addInfoWindow(marker, content){
     let infoWindow = new google.maps.InfoWindow({ content: content });
     google.maps.event.addListener(marker, 'click', () => { infoWindow.open(this.mapGoogle, marker); });
+  }
+
+  saveSpot(template){
+    let spot = {
+      lng: this.lng,
+      lat: this.lat,
+      address: this.autocomplete.query,
+      name: this.spot.name,
+      description: this.spot.description,
+      isPro: true,
+      idMap: this.user.map.id
+    };
+    this.httpService.post('/api/spot/pro/create', spot)
+    .subscribe(data => {
+      this.user.map = data;
+      this.storage.clear('user');
+      this.storage.store('user', this.user);
+      this.openModal(template);
+    }, error => {
+      this.errorRegister = true;
+    });
   }
 
   openModal(template) {
@@ -177,10 +170,9 @@ export class EventCreateComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  goEvents(){
+  goShops(){
     this.closeModal();
-    this.router.navigate(['/dashboard/events']);
+    this.router.navigate(['/dashboard/shops']);
   }
-
 
 }

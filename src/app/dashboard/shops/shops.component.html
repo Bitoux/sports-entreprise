@@ -1,0 +1,43 @@
+<app-sidebar></app-sidebar>
+<div class="main-container">
+  <div class="top-container">
+    <div class="search">
+      <input type="text" placeholder="Search ..." name="" id="">
+    </div>
+    <div class="add">
+      <button (click)="goCreateSpot()"><i class="material-icons dp18">add</i> Add a new Shop</button>
+    </div>
+  </div>
+  <div class="list-container">
+    <h1>Your Spo(r)ts shops</h1>
+    <p>In this section, you can find all your shops </p>
+    <ul class="list">
+      <li class="list-item" *ngFor="let spot of spots">
+        <div class="title">
+          {{spot.name}}
+        </div>
+        <div class="dates">
+          <p>{{spot.address}}</p>
+        </div>
+        <div class="actions">
+          <button class="edit" (click)="editSpot(spot)"><i class="material-icons dp18">edit</i> Edit</button>
+          <button class="delete" (click)="openModal(template, spot)"><i class="material-icons dp18">delete_outline</i> Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+      <h4 class="modal-title pull-left">Are you sure you want to delete this event ?</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <button class="yes" (click)="deleteSpot(spot)"><i class="material-icons dp18">check</i> Yes</button>
+      <button class="no" (click)="closeModal()"><i class="material-icons dp18">clear</i> No</button>
+  </div>
+</ng-template>

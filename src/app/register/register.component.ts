@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import * as Constants from '../shared/constants';
 import {map} from 'rxjs/operators';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,11 +13,19 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  //PAGE
   countries: any;
   company: any;
   registrationGroup: FormGroup;
+  modalRef: BsModalRef;
+  errorRegister: boolean;
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private modalService: BsModalService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.countries = [
@@ -25,16 +36,30 @@ export class RegisterComponent implements OnInit {
       'United states'
     ];
     this.company = {};
+    this.errorRegister = false;
 
   }
 
+  openModal(template) {
+    this.modalRef = this.modalService.show(template);
+  }
 
-  submitRegistration(){
+  closeModal() {
+    this.modalRef.hide();
+  }
+
+  goBackHome(){
+    this.closeModal();
+    this.router.navigate(['/']);
+  }
+
+
+  submitRegistration(template){
     console.log(this.company);
-    this.register();
+    this.register(template);
   }
 
-  register(){
+  register(template){
     let user = {
       username : this.company.name,
       email : this.company.email,
@@ -48,7 +73,9 @@ export class RegisterComponent implements OnInit {
     let url = Constants.API_ENDPOINT + '/api/users/create/company';
     this.http.post(url, user, options)
     .subscribe(data => {
-      console.log(data);
+      this.openModal(template);
+    }, error => {
+      this.errorRegister = true;
     });
   }
 

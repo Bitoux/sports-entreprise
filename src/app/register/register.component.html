@@ -1,10 +1,11 @@
 <div class="main-container">
+    <div class="img-bg"></div>
     <div class="card">
         <div class="card-header">
             Company pro registration
         </div>
         <div class="card-body">
-            <form #registrationForm="ngForm" (submit)="submitRegistration()">
+            <form #registrationForm="ngForm" (submit)="submitRegistration(template)">
                 <div class="form-group">
                     <label for="name">Company name *</label>
                     <input type="text" class="form-control" id="name" name="name" [(ngModel)]="company.name" #name="ngModel"  required>
@@ -88,12 +89,27 @@
 
                 <p class="mention">* required fields</p>
             </form>
+            <p class="error" style="color: red; font-weight: 600; font-size: 20px;" *ngIf="errorRegister == true"> An error occured, pleaser try again. </p>
         </div>
         <div class="card-footer">
-            <a href="/">Return to Home</a>
+            <a href="/">Back to Home</a>
         </div>
     </div>
 
   
   
 </div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Welcome to spo(r)ts company!</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Your account has been created. Go back to the home page to process login.</p>
+        
+        <button (click)="goBackHome()" class="back">Back to Home</button>
+    </div>
+  </ng-template>

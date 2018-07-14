@@ -1,1 +1,22 @@
-<ngx-paypal [config]="payPalConfig"></ngx-paypal>
+<div class="img-bg"></div>
+<div class="card">
+    <h1>Payment</h1>
+    <h3>To begin / continue to use our platform for your shops or events, proceed to the payment.</h3>
+    <p>
+        Payment method: <br>
+        We use Paypal as a propular and secured platform.
+    </p>
+    <hr>
+    <p>Company account offer you:</p>
+    <ul>
+        <li>Promote your company with pro events</li>
+        <li>Put forward your shop</li>
+        <li>Unlimited shops & events</li>  
+    </ul>
+    <div class="card-footer">
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    </div>
+    <div *ngIf="errorPayment == true" class="error">An error occured, please try again.</div>
+    <div *ngIf="successPayment == true" class="success">You payment is accepted.</div>
+    <a class="back" href="/dashboard/events">Back to Dashboard</a>
+</div>

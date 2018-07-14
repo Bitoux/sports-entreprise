@@ -1,8 +1,8 @@
 <app-sidebar></app-sidebar>
 <div class="main-container">
-  <h1>Edit your event</h1>
+  <h1>Create your event</h1>
   <div class="form-container">
-    <form #eventCreateForm="ngForm" (submit)="saveEvent()">
+    <form #eventCreateForm="ngForm" (submit)="saveEvent(template)">
 
       <div class="form-group">
         <label for="name">Event name *</label>
@@ -43,7 +43,7 @@
         <input type="date" class="form-control" id="date" name="date" [(ngModel)]="event.date" #date="ngModel" required>
         <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
           <div *ngIf="date.errors.required">
-            Description is required.
+            Date is required.
           </div>
         </div>
       </div>
@@ -58,17 +58,6 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="img">Event image *</label>
-        <input type="file" class="form-control" (change)="handleFileInput($event.target.files)" accept="image/*" id="img" name="img"
-          [(ngModel)]="event.img" #img="ngModel" required>
-        <div *ngIf="img.invalid && (img.dirty || img.touched)" class="alert alert-danger">
-          <div *ngIf="img.errors.required">
-            Image is required.
-          </div>
-        </div>
-      </div>
-
       <button type="submit">Create</button>
 
     </form>
@@ -77,3 +66,17 @@
     <a href="/dashboard/events">Return to events</a>
   </div>
 </div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Your event has been created !</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Go back to your events page.</p>
+  
+      <button (click)="goEvents()" class="back">Back to Events</button>
+    </div>
+  </ng-template>

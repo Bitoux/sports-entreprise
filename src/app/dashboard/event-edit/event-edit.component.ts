@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 declare var google;
 
@@ -27,10 +29,8 @@ export class EventEditComponent implements OnInit {
   //PAGE
   user: any;
   event: any;
-  
-  // FILE
-  file: any;
-  changedFile: boolean;
+  modalRef: BsModalRef;
+  errorRegister: boolean;
   
 
   constructor(
@@ -38,7 +38,8 @@ export class EventEditComponent implements OnInit {
     private router: Router,
     private httpService: HttpService,
     private zone: NgZone,
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private modalService: BsModalService
   ) {
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -48,12 +49,11 @@ export class EventEditComponent implements OnInit {
 
   ngOnInit() {
     this.event = {};
-    this.changedFile = false;
+    this.errorRegister = false;
 
     this.initTest();
     this.paymentCheck();
     this.getEvent();
-    
   }
 
   initTest(){
@@ -88,6 +88,8 @@ export class EventEditComponent implements OnInit {
       if(this.event !== 'KO'){
         this.checkProEvent();
         this.autocomplete.query = this.event.address;
+        this.lat = this.event.latitude;
+        this.lng = this.event.longitude;
         this.loadMap();
       }else{
         this.router.navigate(['/dashboard/events']);
@@ -140,13 +142,8 @@ export class EventEditComponent implements OnInit {
     });
   }
 
-  handleFileInput(files: FileList) {
-    this.file = files.item(0);
-    this.changedFile = true;
-    console.log(this.file);
-  }
 
-  saveEvent(){
+  saveEvent(template){
     let event = {
       id: this.event.id,
       name: this.event.name,
@@ -155,35 +152,21 @@ export class EventEditComponent implements OnInit {
       lat: this.lat,
       lng: this.lng,
       date: this.event.date,
-      hour: this.event.time,
-      img: this.event.picture,
-      company: this.user.company.id
+      hour: this.event.hour,
+      company: this.user.company.id,
     };
-    if(this.changedFile){
-      event.img = this.file
-    }
+
     console.log(event);
 
-    let fd = new FormData();
-
-    fd.append('id', event.id)
-    fd.append('name', event.name);
-    fd.append('description', event.description);
-    fd.append('address', event.address);
-    fd.append('lat', event.lat);
-    fd.append('lng', event.lng);
-    fd.append('date', event.date);
-    fd.append('hour', event.hour);
-    fd.append('img', event.img);
-    fd.append('company', event.company);
-    fd.append('changed', this.changedFile.toString());
-
-    this.httpService.post('/api/proevents/edit', fd)
+    this.httpService.post('/api/proevents/edit', event)
     .subscribe(data => {
       console.log(data);
       this.user = data;
       this.storage.clear('user');
       this.storage.store('user', this.user);
+      this.openModal(template)
+    }, error => {
+      this.errorRegister = true;
     });
   }
 
@@ -215,6 +198,19 @@ export class EventEditComponent implements OnInit {
 
   deleteMarker(){
     this.marker.setMap(null);
+  }
+
+  openModal(template) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal() {
+    this.modalRef.hide();
+  }
+
+  goEvents(){
+    this.closeModal();
+    this.router.navigate(['/dashboard/events']);
   }
 
 }

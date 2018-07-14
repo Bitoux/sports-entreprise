@@ -3,7 +3,7 @@
   <h1>Your bills</h1>
   <div class="bills-container">
       <ul class="list">
-          <li class="list-item header" *ngFor="let bill of bills">
+          <li class="list-item header">
             <div class="date">
                 Date
               </div>
@@ -28,7 +28,7 @@
               {{bill.amount}} €
             </div>
             <div class="lien">
-              <a target="_blank" href="www.google.fr">Download your bills</a>
+              <a target="_blank" href="http://localhost:8000/pdf/bills/{{bill.bill}}">Download your bills</a>
             </div>
           </li>
       </ul>

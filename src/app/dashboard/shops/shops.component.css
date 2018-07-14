@@ -1,0 +1,161 @@
+.top-container{
+    height: 80px;
+    background-color: #343a40;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc(100% - 250px);
+    z-index: 10;
+}
+
+.opacity-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.search, 
+.add{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+
+.search input{
+    margin-top: 24px;
+    background-color: #343a40;
+    border: 1px solid #ffb300;
+    height: 30px;
+    outline: none;
+    text-align: right;
+    padding: 0 20px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 600;
+}
+
+.add button{
+    outline: none;
+    background-color: #ffb300;
+    border: none;
+    height: 36px;
+    border-radius: 4px;
+    padding: 3px 10px;
+    transition: background-color ease-in-out 0.3s;
+}
+
+.add button:hover{
+    background-color: #ff9900;
+}
+
+.add button i{
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.list-container{
+    padding: 20px;
+    margin-top: 80px;
+}
+
+.list-container .list{
+    margin-top: 40px;
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.list-container .list .list-item{
+    background: #343a40;
+    width: calc(100% / 3 - 40px);
+    margin: 20px;
+    padding-bottom: 20px;
+}
+
+.list-container .list .list-item .title{
+    border-bottom: 1px solid #ffb300;
+    margin: 0 30px;
+    padding: 15px 0;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+
+.list-container .list .list-item .dates{
+    color: white;
+    margin: 0px 30px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ffb300;
+}
+
+.list-container .list .list-item .dates p{
+    text-align: center;
+}
+
+.list-container .list .list-item .dates p:last-of-type{
+    margin-bottom: 0;
+}
+
+.list-container .list .list-item .actions{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.list-container .list .list-item .actions button{
+    border: 0;
+    margin: 0 15px;
+    padding: 0 10px;
+    height: 40px;
+    font-size: 17px;
+    width: 100px;
+}
+
+.list-container .list .list-item .actions button.edit{
+    background-color: #ffb300;
+}
+
+.list-container .list .list-item .actions button.delete{
+    background-color: #ed0e0e;
+    color: white;
+}
+
+.list-container .list .list-item .actions button i{
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.modal-header{
+    border-bottom: 1px solid #343a40;
+}
+
+.modal-header .modal-title{
+    color: #343a40;
+    font-size: 20px;
+
+}
+
+.modal-body button{
+    border: 0;
+    width: 80px;
+    height: 40px;
+}
+
+.modal-body button.yes{
+    background-color: #ed0e0e;
+    color: white;
+}
+
+.modal-body button.no{
+    float: right;
+    background-color: black;
+    color: white;
+}
+
+.modal-body button i{
+    display: inline-block;
+    vertical-align: text-top;
+}
