@@ -43,6 +43,11 @@
 
       <div #mapGoogle id="map"></div>
 
+      <div class="form-group checkbox" *ngFor="let filter of filters; let i = index">
+        <label for="filter-{{filter.id}}">{{filter.designation}}</label>
+        <input type="checkbox" class="form-control" id="filter-{{filter.id}}" name="filter-{{filter.id}}" [(ngModel)]="checkedFilters[i]">
+      </div>
+
       <div class="form-group">
         <label for="date">Event date *</label>
         <input type="date" class="form-control" id="date" name="date" [(ngModel)]="event.date" #date="ngModel" required>
@@ -54,11 +59,11 @@
       </div>
 
       <div class="form-group">
-        <label for="time">Event time *</label>
-        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="event.time" #time="ngModel" required>
-        <div *ngIf="time.invalid && (time.dirty || time.touched)" class="alert alert-danger">
-          <div *ngIf="time.errors.required">
-            Time is required.
+        <label for="hour">Event time *</label>
+        <input type="time" class="form-control" id="hour" name="hour" [(ngModel)]="event.hour" #hour="ngModel" required>
+        <div *ngIf="hour.invalid && (hour.dirty || hour.touched)" class="alert alert-danger">
+          <div *ngIf="hour.errors.required">
+            Hour is required.
           </div>
         </div>
       </div>

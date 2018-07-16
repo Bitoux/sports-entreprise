@@ -32,6 +32,8 @@ export class EventCreateComponent implements OnInit {
   event: any;
   modalRef: BsModalRef;
   errorRegister: boolean;
+  filters: any;
+  checkedFilters: any;
   
   
   constructor(
@@ -52,9 +54,11 @@ export class EventCreateComponent implements OnInit {
   ngOnInit() {
     this.event = {};
     this.errorRegister = false;
+    this.checkedFilters = {};
 
     this.initTest();
     this.paymentCheck();
+    this.getFilters();
   }
 
   initTest(){
@@ -120,26 +124,28 @@ export class EventCreateComponent implements OnInit {
 
   saveEvent(template){
     this.spinner.show();
-    let event = {
-      name: this.event.name,
-      description: this.event.description,
+    console.log(this.checkedFilters);
+    let spot = {
+      longitude: this.lng,
+      latitude: this.lat,
       address: this.autocomplete.query,
-      lat: this.lat,
-      lng: this.lng,
+      name: this.event.name,
+      filters: this.checkedFilters,
+      user_id: this.user.id,
       date: this.event.date,
-      hour: this.event.time,
-      company: this.user.company.id
-    };
-
+      description: this.event.description,
+      hour: this.event.hour,
+      idMap: this.user.map.id
+    }
     
     console.log(event);
-    this.httpService.post('/api/proevents/create', event)
+    this.httpService.post('/api/proevents/create', spot)
     .subscribe(data => {
       this.spinner.hide();
       console.log(data);
       this.user = data;
-      this.storage.clear('user');
-      this.storage.store('user', this.user);
+      //this.storage.clear('user');
+      //this.storage.store('user', this.user);
       this.openModal(template)
     }, error => {
       this.errorRegister = true;
@@ -166,6 +172,17 @@ export class EventCreateComponent implements OnInit {
     });
     let content = this.event.name;
     this.addInfoWindow(this.marker, content);
+  }
+
+  getFilters(){
+    this.spinner.show();
+    this.httpService.get('/api/filters')
+    .subscribe(data => {
+      this.filters = data;
+      this.spinner.hide();
+    }, error => {
+      this.spinner.hide();
+    });
   }
 
   addInfoWindow(marker, content){

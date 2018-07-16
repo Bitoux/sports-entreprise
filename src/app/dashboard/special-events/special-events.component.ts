@@ -58,8 +58,9 @@ export class SpecialEventsComponent implements OnInit {
 
   getSpecialEvent(){
     this.spinner.show();
-    this.httpService.get('/api/company/' + this.user.company.id + '/proevents')
+    this.httpService.get('/api/proevents/' + this.user.id + '/user')
     .subscribe(data => {
+      console.log(data);
       this.events = data;
       this.spinner.hide();
     }, error => {
@@ -89,8 +90,9 @@ export class SpecialEventsComponent implements OnInit {
   deleteEvent(){
     console.log(this.eventToDelete.id);
     this.spinner.show();
-    this.httpService.delete('/api/proevents/' + this.eventToDelete.id + '/delete')
+    this.httpService.delete('/api/events/' + this.eventToDelete.id + '/delete')
     .subscribe(data => {
+      this.events = this.events.filter(el => el.id !== this.eventToDelete.id);
       this.spinner.hide();
       console.log(data);
       this.closeModal();

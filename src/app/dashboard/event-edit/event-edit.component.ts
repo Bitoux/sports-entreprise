@@ -32,6 +32,8 @@ export class EventEditComponent implements OnInit {
   event: any;
   modalRef: BsModalRef;
   errorRegister: boolean;
+  filters: any;
+  checkedFilters: any;
   
 
   constructor(
@@ -52,6 +54,7 @@ export class EventEditComponent implements OnInit {
   ngOnInit() {
     this.event = {};
     this.errorRegister = false;
+    this.checkedFilters = {};
 
     this.initTest();
     this.paymentCheck();
@@ -85,16 +88,19 @@ export class EventEditComponent implements OnInit {
   getEvent(){
     let id = this.route.snapshot.paramMap.get('id');
     this.spinner.show();
-    this.httpService.get('/api/proevents/' + id + '/single')
+    this.httpService.get('/api/events/' + id + '/get')
     .subscribe(data => {
+      console.log(data);
       this.spinner.hide();
       this.event = data;
       if(this.event !== 'KO'){
         this.checkProEvent();
-        this.autocomplete.query = this.event.address;
-        this.lat = this.event.latitude;
-        this.lng = this.event.longitude;
+        this.event.name = this.event.spot.name;
+        this.autocomplete.query = this.event.spot.address;
+        this.lat = this.event.spot.latitude;
+        this.lng = this.event.spot.longitude;
         this.loadMap();
+        this.getFilters();
       }else{
         this.router.navigate(['/dashboard/events']);
       }
@@ -103,8 +109,22 @@ export class EventEditComponent implements OnInit {
     });
   }
 
+  getFilters(){
+    this.spinner.show();
+    this.httpService.get('/api/filters')
+    .subscribe(data => {
+      this.filters = data;
+      this.spinner.hide();
+      this.event.filters.forEach(data => {
+        this.checkedFilters[data.id - 1 ] = true;
+      })
+    }, error => {
+      this.spinner.hide();
+    });
+  }
+
   checkProEvent(){
-    if(this.event.company.id !== this.user.company.id){
+    if(this.event.owner.id !== this.user.id){
       this.router.navigate(['/dashboard/events']);
     }
   }
@@ -153,14 +173,15 @@ export class EventEditComponent implements OnInit {
     this.spinner.show();
     let event = {
       id: this.event.id,
+      spotID: this.event.spot.id,
       name: this.event.name,
       description: this.event.description,
       address: this.autocomplete.query,
-      lat: this.lat,
-      lng: this.lng,
+      latitude: this.lat,
+      longitude: this.lng,
       date: this.event.date,
       hour: this.event.hour,
-      company: this.user.company.id,
+      filters: this.checkedFilters
     };
 
     console.log(event);
@@ -169,9 +190,9 @@ export class EventEditComponent implements OnInit {
     .subscribe(data => {
       this.spinner.hide();
       console.log(data);
-      this.user = data;
+      /*this.user = data;
       this.storage.clear('user');
-      this.storage.store('user', this.user);
+      this.storage.store('user', this.user);*/
       this.openModal(template)
     }, error => {
       this.errorRegister = true;
@@ -180,7 +201,7 @@ export class EventEditComponent implements OnInit {
   }
 
   loadMap(){
-    let latLng = new google.maps.LatLng(this.event.latitude, this.event.longitude);
+    let latLng = new google.maps.LatLng(this.lat, this.lng);
     let mapOptions = {
       center: latLng,
       zoom: 14,
