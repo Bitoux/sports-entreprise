@@ -1,24 +1,28 @@
-<div class="sidebar">
+<div class="sidebar" [ngClass]="{'opened': menu}">
+  <i class="material-icons dp18 close" (click)="closeMenu()" >close</i>
   <div class="container-top">
     <h4>{{user.username}}</h4>  
   </div>
   <div class="nav">
     <ul>
       <li>
-        <a href="/dashboard/shops"><i class="material-icons dp18">shopping_cart</i>Your shop</a>
+        <a [routerLink]="['/dashboard/shops']"><i class="material-icons dp18">shopping_cart</i>Your shop</a>
       </li>
       <li>
-        <a href="/dashboard/events"><i class="material-icons dp18">event_note</i> Your events</a>
+        <a [routerLink]="['/dashboard/events']"><i class="material-icons dp18">event_note</i> Your events</a>
       </li>
       <li>
-        <a href="/dashboard/bills"><i class="material-icons dp18">credit_card</i> My bills</a>
+        <a [routerLink]="['/dashboard/bills']"><i class="material-icons dp18">credit_card</i> My bills</a>
       </li>
       <li>
-        <a href="/dashboard/account"><i class="material-icons dp18">account_box</i> Edit account</a>
+        <a [routerLink]="['/dashboard/account']"><i class="material-icons dp18">account_box</i> Edit account</a>
       </li>
       <li>
         <p (click)="logout()"><i class="material-icons dp18">exit_to_app</i> Logout</p>
       </li>
     </ul>
   </div>
+</div>
+<div [ngClass]="{'opened': menu}" class="burger" (click)="openMenu()" >
+  <i class="material-icons dp18">menu</i>
 </div>

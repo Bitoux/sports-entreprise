@@ -2,9 +2,14 @@
     padding: 20px;
 }
 
+h1{
+    color: #343a40;
+}
+
 .bills-container .list{
     list-style-type: none;
     margin-top: 50px;
+    padding-left: 0;
 }
 
 .bills-container .list .list-item{
@@ -32,4 +37,18 @@
 
 .bills-container .list .list-item div a:hover{
     text-decoration: underline;
+}
+
+@media screen and (max-width: 950px){
+    h1{
+        margin-top: 80px;
+    }
+
+    .list-item .order{
+        display: none;
+    }
+
+    .bills-container .list .list-item div{
+        width: calc(100% / 3);
+    }
 }

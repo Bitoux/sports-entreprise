@@ -2,6 +2,10 @@
     padding: 20px;
 }
 
+h1{
+    color: #343a40;
+}
+
 .form-container{
     max-width: 750px;
     margin: 50px auto 0;
@@ -114,4 +118,14 @@ button[type="submit"]:hover{
 #map{
     height: 350px;
     background-color: rgba(52,58,64, 0.8);
+}
+
+@media screen and (max-width: 950px){
+    h1{
+        margin-top: 80px;
+    }
+
+    #map{
+        height: 250px;
+    }
 }

@@ -28,9 +28,16 @@
               {{bill.amount}} €
             </div>
             <div class="lien">
-              <a target="_blank" href="http://localhost:8000/pdf/bills/{{bill.bill}}">Download your bills</a>
+              <a target="_blank" download href="http://localhost:8000/pdf/bills/{{bill.bill}}">Download your bills</a>
             </div>
           </li>
       </ul>
   </div>
 </div>
+
+<ngx-spinner
+    bdColor = "rgba(52,58,64,0.9)"
+    size = "medium"
+    color = "#ffb300"
+    type = "ball-climbing-dot"
+    ></ngx-spinner>

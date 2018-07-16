@@ -80,12 +80,13 @@
           </div>
         </div>
 
-      <button type="submit">Update</button>
+      <button type="submit" [disabled]="editAcount.invalid">Update</button>
 
     </form>
+    <p class="error" *ngIf="errorRegister == true" >An error occured. Please try again.</p>
   </div>
   <div class="bottom-container">
-    <a href="/dashboard/events">Return to dashboard</a>
+    <a [routerLink]="['/dashboard/events']">Return to dashboard</a>
   </div>
 </div>
 
@@ -102,3 +103,10 @@
       <button (click)="goDashboard()" class="back">Back to Dashboard</button>
     </div>
   </ng-template>
+
+  <ngx-spinner
+    bdColor = "rgba(52,58,64,0.9)"
+    size = "medium"
+    color = "#ffb300"
+    type = "ball-climbing-dot"
+    ></ngx-spinner>

@@ -4,6 +4,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var google;
 
@@ -39,7 +40,8 @@ export class ShopsCreateComponent implements OnInit {
     private storage: LocalStorageService,
     private zone: NgZone,
     private httpService: HttpService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) { 
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -142,6 +144,7 @@ export class ShopsCreateComponent implements OnInit {
   }
 
   saveSpot(template){
+    this.spinner.show();
     let spot = {
       lng: this.lng,
       lat: this.lat,
@@ -153,12 +156,14 @@ export class ShopsCreateComponent implements OnInit {
     };
     this.httpService.post('/api/spot/pro/create', spot)
     .subscribe(data => {
+      this.spinner.hide();
       this.user.map = data;
       this.storage.clear('user');
       this.storage.store('user', this.user);
       this.openModal(template);
     }, error => {
       this.errorRegister = true;
+      this.spinner.hide();
     });
   }
 

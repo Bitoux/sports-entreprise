@@ -26,14 +26,19 @@
       </div>
 
       <div class="form-group">
-        <label>Event address *</label>
-        <input type="text" class="form-control" (keyup)="updateSearch()" [(ngModel)]="autocomplete.query" [ngModelOptions]="{standalone: true}"
+        <label for="address">Event address *</label>
+        <input type="text" id="address" name="address" class="form-control" (keyup)="updateSearch()" [(ngModel)]="autocomplete.query" #address="ngModel" required [ngModelOptions]="{standalone: true}"
           [placeholder]="' '" />
         <ul class="list-group addresses-list" *ngIf="showAddressList">
           <li class="list-group-item" *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
             {{item.description}}
           </li>
         </ul>
+        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+          <div *ngIf="address.errors.required">
+            Address is required.
+          </div>
+        </div>
       </div>
 
       <div #mapGoogle id="map"></div>
@@ -58,13 +63,13 @@
         </div>
       </div>
 
-      <button type="submit">Update</button>
+      <button type="submit" [disabled]="eventCreateForm.invalid">Update</button>
 
     </form>
     <p class="error" *ngIf="errorRegister == true">An error occured, please try again.</p>
   </div>
   <div class="bottom-container">
-    <a href="/dashboard/events">Return to events</a>
+    <a [routerLink]="['/dashboard/events']">Return to events</a>
   </div>
 </div>
 
@@ -81,3 +86,10 @@
       <button (click)="goEvents()" class="back">Back to Events</button>
     </div>
   </ng-template>
+
+  <ngx-spinner
+    bdColor = "rgba(52,58,64,0.9)"
+    size = "medium"
+    color = "#ffb300"
+    type = "ball-climbing-dot"
+    ></ngx-spinner>

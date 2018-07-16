@@ -5,6 +5,13 @@
     height: 100vh;
     padding: 20px;
     top: 0;
+    left: 0;
+    transition: all ease-in-out 0.3s;
+    z-index: 11;
+}
+
+.sidebar .close{
+    display: none;
 }
 
 h4{
@@ -43,4 +50,44 @@ h4{
     vertical-align: text-top;
     margin-right: 10px;
     color: white;
+}
+
+.burger{
+    display: none;
+    z-index: 11;
+}
+
+@media screen and (max-width: 950px){
+    .sidebar{
+        left: -250px;
+    }
+
+    .sidebar.opened{
+        left: 0;
+    }
+
+    .sidebar .close{
+        display: block;
+        color: white;
+    }
+
+    .burger.opened{
+        display: none;
+    }
+
+    .burger{
+        display: block;
+        width: 50px;
+        height: 50px;
+        background-color: #343a40;
+        cursor: pointer;
+        position: fixed;
+        top: 12px;
+    }
+
+    .burger i{
+        color: white;
+        margin-top: 11px;
+        margin-left: 12px;    
+    }
 }

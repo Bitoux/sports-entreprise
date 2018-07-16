@@ -10,6 +10,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 })
 export class SidebarComponent implements OnInit {
   user: any;
+  menu: boolean
 
   constructor(
     private authentification: AuthentificationService,
@@ -19,12 +20,21 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.storage.retrieve('user');
+    this.menu = false;
   }
 
   logout(){
     console.log('deleting storage');
     this.authentification.logout();
     this.router.navigate(['/']);
+  }
+
+  openMenu(){
+    this.menu = true;
+  }
+
+  closeMenu(){
+    this.menu = false;
   }
 
 }

@@ -4,7 +4,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var google;
 
@@ -40,7 +40,8 @@ export class EventCreateComponent implements OnInit {
     private storage: LocalStorageService,
     private zone: NgZone,
     private httpService: HttpService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) {
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -118,6 +119,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   saveEvent(template){
+    this.spinner.show();
     let event = {
       name: this.event.name,
       description: this.event.description,
@@ -133,6 +135,7 @@ export class EventCreateComponent implements OnInit {
     console.log(event);
     this.httpService.post('/api/proevents/create', event)
     .subscribe(data => {
+      this.spinner.hide();
       console.log(data);
       this.user = data;
       this.storage.clear('user');
@@ -140,6 +143,7 @@ export class EventCreateComponent implements OnInit {
       this.openModal(template)
     }, error => {
       this.errorRegister = true;
+      this.spinner.hide();
     });
     
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-bills',
@@ -15,7 +16,8 @@ export class BillsComponent implements OnInit {
   constructor(
     private storage: LocalStorageService,
     private httpService: HttpService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -50,11 +52,15 @@ export class BillsComponent implements OnInit {
 
   getBillsByCompany(){
     let id = this.user.company.id;
+    this.spinner.show();
     this.httpService.get('/api/company/' + id + '/payments')
     .subscribe(data => {
       this.bills = data
       console.log(data);
-    })
+      this.spinner.hide();
+    }, error => {
+      this.spinner.hide();
+    });
   }
 
 }

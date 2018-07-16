@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private http: Http,
     private modalService: BsModalService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -68,14 +70,17 @@ export class RegisterComponent implements OnInit {
       city : this.company.city,
       country: this.company.country
     };
+    this.spinner.show();
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let url = Constants.API_ENDPOINT + '/api/users/create/company';
     this.http.post(url, user, options)
     .subscribe(data => {
       this.openModal(template);
+      this.spinner.hide();
     }, error => {
       this.errorRegister = true;
+      this.spinner.hide();
     });
   }
 

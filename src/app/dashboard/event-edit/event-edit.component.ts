@@ -4,6 +4,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var google;
 
@@ -39,7 +40,8 @@ export class EventEditComponent implements OnInit {
     private httpService: HttpService,
     private zone: NgZone,
     private storage: LocalStorageService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) {
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -82,8 +84,10 @@ export class EventEditComponent implements OnInit {
 
   getEvent(){
     let id = this.route.snapshot.paramMap.get('id');
+    this.spinner.show();
     this.httpService.get('/api/proevents/' + id + '/single')
     .subscribe(data => {
+      this.spinner.hide();
       this.event = data;
       if(this.event !== 'KO'){
         this.checkProEvent();
@@ -94,6 +98,8 @@ export class EventEditComponent implements OnInit {
       }else{
         this.router.navigate(['/dashboard/events']);
       }
+    }, erro => {
+      this.spinner.hide();
     });
   }
 
@@ -144,6 +150,7 @@ export class EventEditComponent implements OnInit {
 
 
   saveEvent(template){
+    this.spinner.show();
     let event = {
       id: this.event.id,
       name: this.event.name,
@@ -160,6 +167,7 @@ export class EventEditComponent implements OnInit {
 
     this.httpService.post('/api/proevents/edit', event)
     .subscribe(data => {
+      this.spinner.hide();
       console.log(data);
       this.user = data;
       this.storage.clear('user');
@@ -167,6 +175,7 @@ export class EventEditComponent implements OnInit {
       this.openModal(template)
     }, error => {
       this.errorRegister = true;
+      this.spinner.hide();
     });
   }
 

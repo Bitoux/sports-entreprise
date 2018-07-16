@@ -5,6 +5,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-special-events',
@@ -21,7 +22,8 @@ export class SpecialEventsComponent implements OnInit {
     private router: Router,
     private storage: LocalStorageService,
     private httpService: HttpService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -55,9 +57,13 @@ export class SpecialEventsComponent implements OnInit {
 
 
   getSpecialEvent(){
+    this.spinner.show();
     this.httpService.get('/api/company/' + this.user.company.id + '/proevents')
     .subscribe(data => {
       this.events = data;
+      this.spinner.hide();
+    }, error => {
+      this.spinner.hide();
     });
   }
 
@@ -82,11 +88,15 @@ export class SpecialEventsComponent implements OnInit {
 
   deleteEvent(){
     console.log(this.eventToDelete.id);
+    this.spinner.show();
     this.httpService.delete('/api/proevents/' + this.eventToDelete.id + '/delete')
     .subscribe(data => {
+      this.spinner.hide();
       console.log(data);
       this.closeModal();
       this.router.navigate(['/dashboard/events/']);
+    }, error => {
+      this.spinner.hide();
     });
   }
 

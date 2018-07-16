@@ -4,6 +4,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-account',
@@ -30,7 +31,8 @@ export class EditAccountComponent implements OnInit {
     private router: Router,
     private httpService: HttpService,
     private storage: LocalStorageService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -77,10 +79,12 @@ export class EditAccountComponent implements OnInit {
 
   getUser(){
     let username = this.user.username;
+    this.spinner.show();
     this.httpService.get('/api/users/' + username + '/get')
     .subscribe(data => {
       this.user = data;
       console.log(this.user);
+      this.spinner.hide();
     });
   }
 
@@ -98,7 +102,6 @@ export class EditAccountComponent implements OnInit {
   }
 
   updateAccount(template){
-    console.log(this.user);
     let user = {
       id: this.user.id,
       username: this.user.username,
@@ -107,14 +110,18 @@ export class EditAccountComponent implements OnInit {
       city: this.user.city,
       country: this.user.country,
       picture: this.user.picture,
-      pinMap: this.user.pinMap
+      pinMap: this.user.pin_map
     }
+    console.log(user);
     if(this.changedFile){
       user.picture = this.file;
     }
     if(this.changedPin){
       user.pinMap = this.pinMap;
     }
+
+    console.log('changed', this.changedFile);
+    console.log('pin', this.changedPin);
 
     let fd = new FormData();
 
@@ -128,15 +135,18 @@ export class EditAccountComponent implements OnInit {
     fd.append('changed', this.changedFile.toString());
     fd.append('pinMap', user.pinMap);
     fd.append('changedPin', this.changedPin.toString());
+    this.spinner.show();
 
     this.httpService.post('/api/user/company/edit', fd)
     .subscribe(data => {
       this.user = data;
       this.storage.clear('user');
       this.storage.store('user', this.user);
-      this.openModal(template)
+      this.openModal(template);
+      this.spinner.hide();
     }, error => {
       this.errorRegister = true;
+      this.spinner.hide();
     });
     
   }
@@ -151,7 +161,7 @@ export class EditAccountComponent implements OnInit {
 
   goDashboard(){
     this.closeModal();
-    this.router.navigate(['/dashboard/event']);
+    this.router.navigate(['/dashboard/events']);
   }
 
 }

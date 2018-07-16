@@ -3,6 +3,7 @@ import { PayPalConfig, PayPalEnvironment, PayPalIntegrationType } from 'ngx-payp
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../shared/provider/http.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-payment',
@@ -20,6 +21,7 @@ export class PaymentComponent implements OnInit {
     private router: Router,
     private storage: LocalStorageService,
     private httpService: HttpService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -82,12 +84,15 @@ export class PaymentComponent implements OnInit {
         payment_token: data.paymentToken,
         return_url: data.returnUrl
       }
-      console.log(payment);
+      this.spinner.show();
       this.httpService.post('/api/payments/add', payment)
       .subscribe(data => {
         this.user = data;
         this.storage.clear('user');
         this.storage.store('user', this.user);
+        this.spinner.hide();
+      }, error => {
+        this.spinner.hide();
       });
     }
 

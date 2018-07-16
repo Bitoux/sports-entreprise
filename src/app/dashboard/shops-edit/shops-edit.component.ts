@@ -4,6 +4,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var google;
 
@@ -38,7 +39,8 @@ export class ShopsEditComponent implements OnInit {
     private httpService: HttpService,
     private zone: NgZone,
     private storage: LocalStorageService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) { 
     this.autocompleteItems = [];
     this.autocomplete = {
@@ -81,18 +83,25 @@ export class ShopsEditComponent implements OnInit {
 
   getSpot(){
     let id = this.route.snapshot.paramMap.get('id');
+    this.spinner.show();
     this.httpService.get('/api/shops/' + id + '/get')
     .subscribe(data => {
+      this.spinner.hide();
       this.spot = data;
       console.log(this.spot);
       if(this.spot !== 'KO'){
         this.checkSpot();
         this.autocomplete.query = this.spot.address;
+        this.lat = this.spot.latitude;
+        this.lng = this.spot.longitude;
+        console.log(this.spot);
         let latLng = new google.maps.LatLng(this.spot.latitude, this.spot.longitude);
         this.loadMap(latLng);
       }else{
         this.router.navigate(['/dashboard/spots']);
       }
+    }, error => {
+      this.spinner.hide();
     });
   }
 
@@ -163,6 +172,7 @@ export class ShopsEditComponent implements OnInit {
   }
 
   saveSpot(template){
+    this.spinner.show();
     let spot = {
       lng: this.lng,
       lat: this.lat,
@@ -175,8 +185,10 @@ export class ShopsEditComponent implements OnInit {
     this.httpService.post('/api/spot/pro/edit', spot)
     .subscribe(data => {
       this.openModal(template);
+      this.spinner.hide();
     }, error => {
       this.errorRegister = true;
+      this.spinner.hide();
     });
   }
 

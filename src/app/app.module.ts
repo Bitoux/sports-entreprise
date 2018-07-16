@@ -6,6 +6,7 @@ import { Http, HttpModule, RequestOptions } from '@angular/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { AuthHttp } from 'angular2-jwt';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -54,7 +55,8 @@ import { ShopsEditComponent } from './dashboard/shops-edit/shops-edit.component'
     ReactiveFormsModule,
     HttpModule,
     Ng2Webstorage,
-    NgxPayPalModule
+    NgxPayPalModule,
+    NgxSpinnerModule
   ],
   providers: [
     AuthentificationService,

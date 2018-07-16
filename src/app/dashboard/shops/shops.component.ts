@@ -4,6 +4,7 @@ import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-shops',
@@ -20,7 +21,8 @@ export class ShopsComponent implements OnInit {
     private router: Router,
     private storage: LocalStorageService,
     private httpService: HttpService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -71,9 +73,14 @@ export class ShopsComponent implements OnInit {
 
   deleteSpot(){
     console.log(this.spotToDelete.id);
+    this.spinner.show();
     this.httpService.delete('/api/spots/' + this.spotToDelete.id + '/delete')
     .subscribe(data => {
+      this.spots = this.spots.filter(el => el.id !== this.spotToDelete.id);
+      this.spinner.hide();
       this.closeModal();
+    }, error => {
+      this.spinner.hide();
     });
   }
 
@@ -83,9 +90,13 @@ export class ShopsComponent implements OnInit {
 
   getUserShop(){
     console.log(this.user);
+    this.spinner.show();
     this.httpService.get('/api/map/' + this.user.map.id + '/shops')
     .subscribe( data => {
+      this.spinner.hide();
       this.spots = data;
+    }, error => {
+      this.spinner.hide();
     });
   }
 
