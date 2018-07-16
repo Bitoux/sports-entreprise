@@ -9,13 +9,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 declare var google;
 
 @Component({
-  selector: 'app-event-create',
-  templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.css']
+  selector: 'app-event-edit',
+  templateUrl: './event-edit.component.html',
+  styleUrls: ['./event-edit.component.css']
 })
-export class EventCreateComponent implements OnInit {
+export class EventEditComponent implements OnInit {
 
-  // GOOGLE
+  //GOOGLE
   @ViewChild('mapGoogle') mapElement: ElementRef;
   service = new google.maps.places.AutocompleteService();
   geocoder = new google.maps.Geocoder();
@@ -27,19 +27,19 @@ export class EventCreateComponent implements OnInit {
   mapGoogle: any;
   marker: any;
 
-  // PAGE
+  //PAGE
   user: any;
   event: any;
   modalRef: BsModalRef;
   errorRegister: boolean;
   
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private storage: LocalStorageService,
-    private zone: NgZone,
     private httpService: HttpService,
+    private zone: NgZone,
+    private storage: LocalStorageService,
     private modalService: BsModalService,
     private spinner: NgxSpinnerService
   ) {
@@ -55,6 +55,7 @@ export class EventCreateComponent implements OnInit {
 
     this.initTest();
     this.paymentCheck();
+    this.getEvent();
   }
 
   initTest(){
@@ -69,15 +70,42 @@ export class EventCreateComponent implements OnInit {
 
   paymentCheck(){
     if(this.user.company.payments.length === 0){
-      this.router.navigate(['/payment', { id: this.user.id }]);
+      this.router.navigate(['/payment']);
     }else{
       let last_pay = this.user.company.payments[this.user.company.payments.length -1].date;
       last_pay = new Date(last_pay);
       last_pay.setMonth(last_pay.getMonth() + 1);
       let today = new Date();
       if(last_pay <= today){
-        this.router.navigate(['/payment', { id: this.user.id }]);
+        this.router.navigate(['/payment']);
       }
+    }
+  }
+
+  getEvent(){
+    let id = this.route.snapshot.paramMap.get('id');
+    this.spinner.show();
+    this.httpService.get('/api/proevents/' + id + '/single')
+    .subscribe(data => {
+      this.spinner.hide();
+      this.event = data;
+      if(this.event !== 'KO'){
+        this.checkProEvent();
+        this.autocomplete.query = this.event.address;
+        this.lat = this.event.latitude;
+        this.lng = this.event.longitude;
+        this.loadMap();
+      }else{
+        this.router.navigate(['/dashboard/events']);
+      }
+    }, erro => {
+      this.spinner.hide();
+    });
+  }
+
+  checkProEvent(){
+    if(this.event.company.id !== this.user.company.id){
+      this.router.navigate(['/dashboard/events']);
     }
   }
 
@@ -111,29 +139,33 @@ export class EventCreateComponent implements OnInit {
           me.autocomplete.query = results[0].formatted_address;
           me.lat = results[0].geometry.location.lat();
           me.lng = results[0].geometry.location.lng();
+          me.deleteMarker();
           let latLng = new google.maps.LatLng(me.lat, me.lng);
-          me.loadMap(latLng);
+          me.addMarker(latLng);
+          me.mapGoogle.setCenter(latLng);
         }
       }
     });
   }
 
+
   saveEvent(template){
     this.spinner.show();
     let event = {
+      id: this.event.id,
       name: this.event.name,
       description: this.event.description,
       address: this.autocomplete.query,
       lat: this.lat,
       lng: this.lng,
       date: this.event.date,
-      hour: this.event.time,
-      company: this.user.company.id
+      hour: this.event.hour,
+      company: this.user.company.id,
     };
 
-    
     console.log(event);
-    this.httpService.post('/api/proevents/create', event)
+
+    this.httpService.post('/api/proevents/edit', event)
     .subscribe(data => {
       this.spinner.hide();
       console.log(data);
@@ -145,10 +177,10 @@ export class EventCreateComponent implements OnInit {
       this.errorRegister = true;
       this.spinner.hide();
     });
-    
   }
 
-  loadMap(latLng){
+  loadMap(){
+    let latLng = new google.maps.LatLng(this.event.latitude, this.event.longitude);
     let mapOptions = {
       center: latLng,
       zoom: 14,
@@ -173,6 +205,10 @@ export class EventCreateComponent implements OnInit {
     google.maps.event.addListener(marker, 'click', () => { infoWindow.open(this.mapGoogle, marker); });
   }
 
+  deleteMarker(){
+    this.marker.setMap(null);
+  }
+
   openModal(template) {
     this.modalRef = this.modalService.show(template);
   }
@@ -185,6 +221,5 @@ export class EventCreateComponent implements OnInit {
     this.closeModal();
     this.router.navigate(['/dashboard/events']);
   }
-
 
 }

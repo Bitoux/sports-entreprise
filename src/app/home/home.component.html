@@ -22,7 +22,8 @@
                 <a class="nav-link page-scroll" href="#contact">Contact</a>
             </li>
             <li class="nav-item mr-3" style="margin-top: 7px;">
-                    <button class="btn btn-lg btn-custom" (click)="openModal(template)">Launch demo modal</button>
+                    <button *ngIf="gotUser == false" class="btn btn-lg btn-custom" (click)="openModal(template)">Login</button>
+                    <button *ngIf="gotUser == true" class="btn btn-lg btn-custom" (click)="redirectToDashBoard()">Dashboard</button>
                 <!--<a href="#" (click)="open()" class="nav-link page-scroll">Pros</a> -->
             </li>
         </ul>
@@ -59,7 +60,7 @@
             <div class="col-md-6 col-sm-8 mx-auto text-center wow fadeIn">
                 <h2 class="text-black">Why Choose Spo(r)ts?</h2>
                 <p class="lead">
-                    Appster is more than just an event app.
+                    Spo(r)ts is more than just an event app.
                 </p>
             </div>
         </div>
@@ -71,7 +72,7 @@
                             <i class="material-icons dp36">map</i>
                         </div>
                         <h5 class="card-title text-black pt-5">Get your own map</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                        <p class="card-text">Using google map technology, your map is set when you register.</p>
                     </div>
                 </div>
             </div>
@@ -82,7 +83,7 @@
                             <i class="material-icons dp36">add_location</i>
                         </div>
                         <h5 class="card-title text-black pt-5">Add your Spot</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                        <p class="card-text">Bring all your playgrounds in your smartpshone.</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +94,7 @@
                             <i class="material-icons dp36">supervised_user_circle</i>
                         </div>
                         <h5 class="card-title text-black pt-5">Build your team</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                        <p class="card-text">Create a community, and discover new Spots</p>
                     </div>
                 </div>
             </div>
@@ -104,7 +105,7 @@
                             <i class="material-icons dp36">directions_run</i>
                         </div>
                         <h5 class="card-title text-black pt-5">Participate to events</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                        <p class="card-text">Play with all your friends to events Home / Vistors</p>
                     </div>
                 </div>
             </div>
@@ -127,22 +128,18 @@
         <div class="row d-md-flex mt-5">
             <div class="col-sm-4 wow fadeIn">
                 <h5 class="text-orange">Map & Spots</h5>
-                <p>Get your own map and register all the spot you like to pactise</p>
+                <p>Get your own map and register all the spot you like to pactise. <br> Collect the best spots, and discover new ones.</p>
                 <h5 class="text-orange pt-5">Events</h5>
-                <p>Create or participate to any events directly on the app.</p>
-                <h5 class="text-orange pt-5">Unique Design</h5>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                <p>Create or participate to any events directly on the app. <br> Customise your event icon with pro event. </p>
             </div>
             <div class="col-sm-4 wow fadeIn">
                 <img class="img-fluid mx-auto d-block pb-3" src="assets/img/shot-3.png" alt="Gallery">
             </div>
             <div class="col-sm-4 wow fadeIn">
-                <h5 class="text-orange">Unlimited Features</h5>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
-                <h5 class="text-orange pt-5">High Resolution</h5>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
-                <h5 class="text-orange pt-5">Modern Design</h5>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                <h5 class="text-orange">Pro Account</h5>
+                <p>Pro account let you customise your event icon. <br> Let everybody reconise your event with a personnal marker.</p>
+                <h5 class="text-orange pt-5">Comunity</h5>
+                <p>Meet a new comunity or play with your friends. <br> Bring your friends to the best spot you got.</p>
             </div>
         </div>
     </div>
@@ -159,7 +156,7 @@
                 </p>
             </div>
         </div>
-        <div class="row d-md-flex mt-4 text-center">
+        <div style="justify-content: center;" class="row d-md-flex mt-4 text-center">
             <div class="col-md-4 mt-2 wow fadeIn">
                 <div class="card card-outline-black">
                     <div class="card-body">
@@ -167,10 +164,10 @@
                         <h3 class="card-title text-black pt-4">FREE</h3>
                         <p class="card-text text-muted pb-3 border-bottom-black">per month</p>
                         <ul class="list-unstyled pricing-list">
-                            <li>Free setup</li>
-                            <li>100MB storage</li>
-                            <li>1GB bandwidth</li>
-                            <li>Basic support</li>
+                            <li>One map</li>
+                            <li>20 Spot</li>
+                            <li>20 Event</li>
+                            <li>Unlimited friends</li>
                         </ul>
                         
                     </div>
@@ -180,31 +177,29 @@
                 <div class="card card-outline-black bg-black text-white">
                     <div class="card-body">
                         <h5 class="card-title pt-4 text-white">Standard</h5>
-                        <h3 class="card-title text-orange pt-4"><sup>$</sup> 9.99</h3>
+                        <h3 class="card-title text-orange pt-4">5.00<sup>€</sup></h3>
                         <p class="card-text text-muted pb-3 border-bottom">per month</p>
                         <ul class="list-unstyled pricing-list">
-                            <li>Free setup</li>
-                            <li>5GB storage</li>
-                            <li>Unlimited bandwidth</li>
-                            <li>Priority support</li>
+                            <li>One map</li>
+                            <li>Unlimited spots</li>
+                            <li>Unlimited events</li>
+                            <li>Unlimited friends</li>
                         </ul>
-                        
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mt-2 wow fadeIn">
-                <div class="card card-outline-black">
+                <div class="card card-outline-black bg-black text-white">
                     <div class="card-body">
-                        <h5 class="card-title pt-4 text-orange">Advanced</h5>
-                        <h3 class="card-title text-black pt-4"><sup>$</sup> 19.99</h3>
-                        <p class="card-text text-muted pb-3 border-bottom-black">per month</p>
+                        <h5 class="card-title pt-4 text-white">Company</h5>
+                        <h3 class="card-title text-orange pt-4">15.00<sup>€</sup></h3>
+                        <p class="card-text text-muted pb-3 border-bottom">per month</p>
                         <ul class="list-unstyled pricing-list">
-                            <li>Free setup</li>
-                            <li>Unlimited storage</li>
-                            <li>Unlimited bandwidth</li>
-                            <li>24/7 support</li>
+                            <li>Propulse you shop / factory</li>
+                            <li>Create pro event</li>
+                            <li>Unlimited shop</li>
+                            <li>Unlimited events</li>
                         </ul>
-                        
                     </div>
                 </div>
             </div>
@@ -238,17 +233,17 @@
             <div class="col-md-6 col-sm-8 mx-auto text-center">
                 <h2 class="text-black">Our Team</h2>
                 <p class="lead">
-                    We're a team of three people.
+                    We're a team of two people.
                 </p>
             </div>
         </div>
-        <div class="row d-md-flex mt-4 text-center">
+        <div style="justify-content: center;" class="row d-md-flex mt-4 text-center">
             <div class="col-sm-4 mt-2 wow fadeIn">
                 <div class="card border-none">
                     <div class="card-body">
                         <img src="assets/img/team-1.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
-                        <h5 class="card-title text-black pt-4">John Deo</h5>
-                        <p class="card-text">App Designer</p>
+                        <h5 class="card-title text-black pt-4">Thimoté Molavy</h5>
+                        <p class="card-text">Ionic Developer / Symfony Developer</p>
                     </div>
                 </div>
             </div>
@@ -256,17 +251,8 @@
                 <div class="card border-none">
                     <div class="card-body">
                         <img src="assets/img/team-2.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
-                        <h5 class="card-title text-black pt-4">Brandon Lee</h5>
-                        <p class="card-text">Ionic Developer</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mt-2 wow fadeIn">
-                <div class="card border-none">
-                    <div class="card-body">
-                        <img src="assets/img/team-3.jpg" alt="Male" class="img-team img-fluid rounded-circle"/>
-                        <h5 class="card-title text-black pt-4">Inza Fererri</h5>
-                        <p class="card-text">Android Developer</p>
+                        <h5 class="card-title text-black pt-4">Yann Miloux</h5>
+                        <p class="card-text">Ionic Developer / Symfony Developer</p>
                     </div>
                 </div>
             </div>
@@ -280,15 +266,15 @@
         <div class="row d-md-flex text-white text-center wow fadeIn">
             <div class="col-md-4 p-5">
                 <p><em class="material-icons dp36">phone</em></p>
-                <p class="lead">+49 5456 87595</p>
+                <p class="lead">+33 1 43 87 98 32</p>
             </div>
             <div class="col-md-4 p-5">
                 <p><em class="material-icons dp36">email</em></p>
-                <p class="lead">appster.support@gmail.com</p>
+                <p class="lead">sportsesgi@gmail.com</p>
             </div>
             <div class="col-md-4 p-5">
                 <p><em class="material-icons dp36">location_on</em></p>
-                <p class="lead">Berlin, Germany</p>
+                <p class="lead">Paris, France</p>
             </div>
         </div>
     </div>
@@ -351,3 +337,10 @@
         <a href="/register">Create a pro account</a>
     </div>
 </ng-template>
+
+<ngx-spinner
+    bdColor = "rgba(52,58,64,0.9)"
+    size = "medium"
+    color = "#ffb300"
+    type = "ball-climbing-dot"
+    ></ngx-spinner>

@@ -1,6 +1,6 @@
 <app-sidebar></app-sidebar>
 <div class="main-container">
-  <h1>Create your event</h1>
+  <h1>Edit your event</h1>
   <div class="form-container">
     <form #eventCreateForm="ngForm" (submit)="saveEvent(template)">
 
@@ -26,9 +26,9 @@
       </div>
 
       <div class="form-group">
-        <label for="address">Enter address * </label>
-        <input type="text" class="form-control" id="address" name="address" (keyup)="updateSearch()" [(ngModel)]="autocomplete.query" #address="ngModel" required [ngModelOptions]="{standalone: true}" [placeholder]="' '"
-        />
+        <label for="address">Event address *</label>
+        <input type="text" id="address" name="address" class="form-control" (keyup)="updateSearch()" [(ngModel)]="autocomplete.query" #address="ngModel" required [ngModelOptions]="{standalone: true}"
+          [placeholder]="' '" />
         <ul class="list-group addresses-list" *ngIf="showAddressList">
           <li class="list-group-item" *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
             {{item.description}}
@@ -48,24 +48,25 @@
         <input type="date" class="form-control" id="date" name="date" [(ngModel)]="event.date" #date="ngModel" required>
         <div *ngIf="date.invalid && (date.dirty || date.touched)" class="alert alert-danger">
           <div *ngIf="date.errors.required">
-            Date is required.
+            Description is required.
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="time">Event time *</label>
-        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="event.time" #time="ngModel" required>
-        <div *ngIf="time.invalid && (time.dirty || time.touched)" class="alert alert-danger">
-          <div *ngIf="time.errors.required">
+        <label for="hour">Event time *</label>
+        <input type="time" class="form-control" id="hour" name="hour" [(ngModel)]="event.hour" #hour="ngModel" required>
+        <div *ngIf="hour.invalid && (hour.dirty || hour.touched)" class="alert alert-danger">
+          <div *ngIf="hour.errors.required">
             Time is required.
           </div>
         </div>
       </div>
 
-      <button type="submit" [disabled]="eventCreateForm.invalid">Create</button>
+      <button type="submit" [disabled]="eventCreateForm.invalid">Update</button>
 
     </form>
+    <p class="error" *ngIf="errorRegister == true">An error occured, please try again.</p>
   </div>
   <div class="bottom-container">
     <a [routerLink]="['/dashboard/events']">Return to events</a>

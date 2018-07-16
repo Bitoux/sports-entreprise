@@ -33,7 +33,7 @@ export class AuthentificationService {
           this.storage.store('id_token', data.token);
           this.user = this.jwtHelper.decodeToken(data.token).username;
           resolve(this.user)
-        }, err => { console.log(err); }
+        }, err => { return false; }
       );
     });
   }

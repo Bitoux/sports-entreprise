@@ -48,11 +48,12 @@ export class HttpService {
       });
   }
 
-  uploadSpeEventPicture(file){
-    let options = {
-      url: "http://localhost:8000/api/speevent/upload",
-      headers: { "Authorization": "Bearer " + storage.retrieve('id_token'), "Accept" : "application/json" },
-      params: { "param1": "val1", "param2": "val2" }
-    };
+  delete(url) {
+    return this.authHttp.delete(this.baseUrl + url)
+      .map(resp => resp.json())
+      .finally(() => {
+        console.log('delete done!')
+      });
   }
+
 }

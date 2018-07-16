@@ -1,2 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/css/bootstrap.min.css';
+.main-container{
+    width: calc(100% - 250px);
+    margin-left: auto;
+}
+
+
+.modal-header{
+    font-family: Catamaran,sans-serif;
+    font-weight: 600;
+    color: #343a40;
+    background: white;
+    border-bottom: 1px solid #343a40;
+    padding: 25px;
+}
+
+.modal-header h4{
+    font-size: 20px;
+}
+
+.modal-body button{
+    display: block;
+    height: 50px;
+    background: #343a40;
+    font-family: Catamaran,sans-serif;
+    font-weight: 600;
+    color: white;
+    width: 150px;
+    text-align: center;
+    line-height: 50px;
+    transition: all 0.3s ease-in-out;
+    border: 0;
+}
+
+.modal-body button.yes,
+.modal-body button.no{
+    display: inline-block;
+    height: 50px !important;
+}
+
+@media screen and (max-width: 950px){
+    .main-container{
+        width: 100%;
+        margin-left: auto;
+    }
+}

@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
+import { HttpService } from '../../shared/provider/http.service';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-bills',
+  templateUrl: './bills.component.html',
+  styleUrls: ['./bills.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class BillsComponent implements OnInit {
   user: any;
+  bills: any;
 
   constructor(
-    private route: ActivatedRoute,
+    private storage: LocalStorageService,
+    private httpService: HttpService,
     private router: Router,
-    private storage: LocalStorageService
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
     this.initTest();
-
     this.paymentCheck();
+    this.getBillsByCompany();
   }
 
   initTest(){
@@ -32,7 +35,6 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
-
 
   paymentCheck(){
     if(this.user.company.payments.length === 0){
@@ -46,6 +48,19 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/payment', { id: this.user.id }]);
       }
     }
+  }
+
+  getBillsByCompany(){
+    let id = this.user.company.id;
+    this.spinner.show();
+    this.httpService.get('/api/company/' + id + '/payments')
+    .subscribe(data => {
+      this.bills = data
+      console.log(data);
+      this.spinner.hide();
+    }, error => {
+      this.spinner.hide();
+    });
   }
 
 }

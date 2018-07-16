@@ -5,25 +5,23 @@
       <input type="text" placeholder="Search ..." name="" id="">
     </div>
     <div class="add">
-      <button (click)="goCreateEvent()"><i class="material-icons dp18">add</i> Add a new Event</button>
+      <button (click)="goCreateSpot()"><i class="material-icons dp18">add</i> Add a new Shop</button>
     </div>
   </div>
   <div class="list-container">
-    <h1>Your Spo(r)ts events</h1>
-    <p>In this section, you can find all your events create with your pro account.</p>
+    <h1>Your Spo(r)ts shops</h1>
+    <p>In this section, you can find all your shops </p>
     <ul class="list">
-      <li class="list-item" *ngFor="let event of events">
+      <li class="list-item" *ngFor="let spot of spots">
         <div class="title">
-          {{event.name}}
+          {{spot.name}}
         </div>
         <div class="dates">
-          <p>{{event.date}}</p>
-          <p>-</p>
-          <p>{{event.hour}}</p>
+          <p>{{spot.address}}</p>
         </div>
         <div class="actions">
-          <button class="edit" (click)="editEvent(event)"><i class="material-icons dp18">edit</i> Edit</button>
-          <button class="delete" (click)="openModal(template, event)"><i class="material-icons dp18">delete_outline</i> Delete</button>
+          <button class="edit" (click)="editSpot(spot)"><i class="material-icons dp18">edit</i> Edit</button>
+          <button class="delete" (click)="openModal(template, spot)"><i class="material-icons dp18">delete_outline</i> Delete</button>
         </div>
       </li>
     </ul>
@@ -39,7 +37,7 @@
       </button>
   </div>
   <div class="modal-body">
-      <button class="yes" (click)="deleteEvent(event)"><i class="material-icons dp18">check</i> Yes</button>
+      <button class="yes" (click)="deleteSpot(spot)"><i class="material-icons dp18">check</i> Yes</button>
       <button class="no" (click)="closeModal()"><i class="material-icons dp18">clear</i> No</button>
   </div>
 </ng-template>

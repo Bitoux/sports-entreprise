@@ -91,6 +91,7 @@
     margin: 0px 30px;
     padding: 20px 0;
     border-bottom: 1px solid #ffb300;
+    height: 120px;
 }
 
 .list-container .list .list-item .dates p{

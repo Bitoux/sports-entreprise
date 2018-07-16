@@ -6,6 +6,7 @@ import { Http, HttpModule, RequestOptions } from '@angular/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { AuthHttp } from 'angular2-jwt';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -15,11 +16,16 @@ import { RegisterComponent } from './register/register.component';
 import { CompareValidatorDirective } from './shared/compare-validator.directive';
 import { AuthentificationService } from './shared/authentification.service';
 import { authHttpServiceFactory, HttpService } from "./shared/provider/http.service";
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { SpecialEventsComponent } from './dashboard/special-events/special-events.component';
 import { PaymentComponent } from './payment/payment.component';
 import { EventCreateComponent } from './dashboard/event-create/event-create.component';
+import { EventEditComponent } from './dashboard/event-edit/event-edit.component';
+import { BillsComponent } from './dashboard/bills/bills.component';
+import { EditAccountComponent } from './dashboard/edit-account/edit-account.component';
+import { ShopsComponent } from './dashboard/shops/shops.component';
+import { ShopsCreateComponent } from './dashboard/shops-create/shops-create.component';
+import { ShopsEditComponent } from './dashboard/shops-edit/shops-edit.component';
 
 
 
@@ -30,11 +36,16 @@ import { EventCreateComponent } from './dashboard/event-create/event-create.comp
     MenuComponent,
     RegisterComponent,
     CompareValidatorDirective,
-    DashboardComponent,
     SidebarComponent,
     SpecialEventsComponent,
     PaymentComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    EventEditComponent,
+    BillsComponent,
+    EditAccountComponent,
+    ShopsComponent,
+    ShopsCreateComponent,
+    ShopsEditComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +55,8 @@ import { EventCreateComponent } from './dashboard/event-create/event-create.comp
     ReactiveFormsModule,
     HttpModule,
     Ng2Webstorage,
-    NgxPayPalModule
+    NgxPayPalModule,
+    NgxSpinnerModule
   ],
   providers: [
     AuthentificationService,

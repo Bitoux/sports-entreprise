@@ -1,0 +1,112 @@
+<app-sidebar></app-sidebar>
+<div class="main-container">
+  <h1>Edit your account</h1>
+  <div class="form-container">
+    <form #editAcount="ngForm" (submit)="updateAccount(template)">
+
+      <div class="form-group">
+        <label for="username">Username *</label>
+        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="user.username" #username="ngModel" required>
+        <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+          <div *ngIf="username.errors.required">
+            Username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required #email="ngModel">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+            Email is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address *</label>
+        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="user.adress" required #address="ngModel">
+        <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+          <div *ngIf="address.errors.required">
+            Address is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="city">City *</label>
+        <input type="text" class="form-control" id="city" name="city" [(ngModel)]="user.city" required #city="ngModel">
+        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+          <div *ngIf="city.errors.required">
+            City is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country *</label>
+        <select class="form-control" id="country" required #country="ngModel" name="country" [(ngModel)]="user.country">
+          <option *ngFor="let country of countries" [value]="country">{{country}}</option>
+        </select>
+        <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
+          <div *ngIf="country.errors.required">
+            Country is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="file-container">
+        <div class="form-group">
+          <label for="picture">Profil picture</label>
+          <input type="file" class="form-control" (change)="handleFileInput($event.target.files, 'picture')" accept="image/*" id="img" name="img"
+            [(ngModel)]="user.img" #img="ngModel">
+        </div>
+        <div class="image-container">
+            <p>Choose an image with square dimensions ( 50x50 / 150/150 ... )</p>
+            <img *ngIf="user.picture" src="http://localhost:8000/uploads/company/{{user.picture}}" alt="">
+        </div>
+      </div>
+
+      <div class="file-container">
+          <div class="form-group">
+            <label for="pimMap">PinMap picture</label>
+            <input type="file" class="form-control" (change)="handleFileInput($event.target.files, 'pinMap')" accept="image/*" id="pimMap" name="pimMap"
+              [(ngModel)]="user.pimMap" #pimMap="ngModel">
+          </div>
+          <div class="image-container">
+              <p>Choose a white png image with square dimensions ( 50x50 / 150/150 ... )</p>
+              <img *ngIf="user.picture" src="http://localhost:8000/uploads/company/{{user.pin_map}}" alt="">
+          </div>
+        </div>
+
+      <button type="submit" [disabled]="editAcount.invalid">Update</button>
+
+    </form>
+    <p class="error" *ngIf="errorRegister == true" >An error occured. Please try again.</p>
+  </div>
+  <div class="bottom-container">
+    <a [routerLink]="['/dashboard/events']">Return to dashboard</a>
+  </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Your account has been updated !</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Go back to your dashboard page.</p>
+  
+      <button (click)="goDashboard()" class="back">Back to Dashboard</button>
+    </div>
+  </ng-template>
+
+  <ngx-spinner
+    bdColor = "rgba(52,58,64,0.9)"
+    size = "medium"
+    color = "#ffb300"
+    type = "ball-climbing-dot"
+    ></ngx-spinner>

@@ -1,0 +1,43 @@
+<app-sidebar></app-sidebar>
+<div class="main-container">
+  <h1>Your bills</h1>
+  <div class="bills-container">
+      <ul class="list">
+          <li class="list-item header">
+            <div class="date">
+                Date
+              </div>
+              <div class="order">
+                Order
+              </div>
+              <div class="amount">
+                Amount (€) 
+              </div>
+              <div class="amount">
+                PDF Download 
+              </div>
+          </li>
+          <li class="list-item" *ngFor="let bill of bills">
+            <div class="date">
+              {{bill.date}}
+            </div>
+            <div class="order">
+              {{bill.order_id}}
+            </div>
+            <div class="amount">
+              {{bill.amount}} €
+            </div>
+            <div class="lien">
+              <a target="_blank" download href="http://localhost:8000/pdf/bills/{{bill.bill}}">Download your bills</a>
+            </div>
+          </li>
+      </ul>
+  </div>
+</div>
+
+<ngx-spinner
+    bdColor = "rgba(52,58,64,0.9)"
+    size = "medium"
+    color = "#ffb300"
+    type = "ball-climbing-dot"
+    ></ngx-spinner>

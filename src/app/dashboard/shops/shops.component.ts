@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -8,15 +7,15 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-special-events',
-  templateUrl: './special-events.component.html',
-  styleUrls: ['./special-events.component.css']
+  selector: 'app-shops',
+  templateUrl: './shops.component.html',
+  styleUrls: ['./shops.component.css']
 })
-export class SpecialEventsComponent implements OnInit {
+export class ShopsComponent implements OnInit {
   user: any;
-  events: any;
+  spots: any;
   modalRef: BsModalRef;
-  eventToDelete: any;
+  spotToDelete: any;
 
   constructor(
     private router: Router,
@@ -27,17 +26,21 @@ export class SpecialEventsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.spots = [];
+
     this.initTest();
-
     this.paymentCheck();
+    this.getUserShop();
+  }
 
-    this.getSpecialEvent();
-    
+  goCreateSpot(){
+    console.log('create spot');
+    this.router.navigate(['dashboard/shops/create']);
   }
 
   openModal(template, event) {
     this.modalRef = this.modalService.show(template);
-    this.eventToDelete = event;
+    this.spotToDelete = event;
   }
 
   closeModal() {
@@ -54,54 +57,47 @@ export class SpecialEventsComponent implements OnInit {
     }
   }
 
-
-
-  getSpecialEvent(){
-    this.spinner.show();
-    this.httpService.get('/api/company/' + this.user.company.id + '/proevents')
-    .subscribe(data => {
-      this.events = data;
-      this.spinner.hide();
-    }, error => {
-      this.spinner.hide();
-    });
-  }
-
-  goCreateEvent(){
-    console.log('create event');
-    this.router.navigate(['/dashboard/events/create'])
-  }
-
   paymentCheck(){
     if(this.user.company.payments.length === 0){
-      this.router.navigate(['/dashboard/payment']);
+      this.router.navigate(['/payment']);
     }else{
       let last_pay = this.user.company.payments[this.user.company.payments.length -1].date;
       last_pay = new Date(last_pay);
       last_pay.setMonth(last_pay.getMonth() + 1);
       let today = new Date();
       if(last_pay <= today){
-        this.router.navigate(['/dashboard/payment']);
+        this.router.navigate(['/payment']);
       }
     }
   }
 
-  deleteEvent(){
-    console.log(this.eventToDelete.id);
+  deleteSpot(){
+    console.log(this.spotToDelete.id);
     this.spinner.show();
-    this.httpService.delete('/api/proevents/' + this.eventToDelete.id + '/delete')
+    this.httpService.delete('/api/spots/' + this.spotToDelete.id + '/delete')
     .subscribe(data => {
+      this.spots = this.spots.filter(el => el.id !== this.spotToDelete.id);
       this.spinner.hide();
-      console.log(data);
       this.closeModal();
-      this.router.navigate(['/dashboard/events/']);
     }, error => {
       this.spinner.hide();
     });
   }
 
-  editEvent(event){
-    this.router.navigate(['/dashboard/events/' + event.id]);
+  editSpot(event){
+    this.router.navigate(['/dashboard/shops/' + event.id]);
+  }
+
+  getUserShop(){
+    console.log(this.user);
+    this.spinner.show();
+    this.httpService.get('/api/map/' + this.user.map.id + '/shops')
+    .subscribe( data => {
+      this.spinner.hide();
+      this.spots = data;
+    }, error => {
+      this.spinner.hide();
+    });
   }
 
 }
