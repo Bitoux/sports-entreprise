@@ -152,7 +152,8 @@ export class ShopsCreateComponent implements OnInit {
       name: this.spot.name,
       description: this.spot.description,
       isPro: true,
-      idMap: this.user.map.id
+      idMap: this.user.map.id,
+      company: this.user.company.id
     };
     this.httpService.post('/api/spot/pro/create', spot)
     .subscribe(data => {
