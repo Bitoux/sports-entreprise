@@ -92,7 +92,7 @@ export class ShopsComponent implements OnInit {
   getUserShop(){
     console.log(this.user);
     this.spinner.show();
-    this.httpService.get('/api/map/' + this.user.map.id + '/shops')
+    this.httpService.get('/api/map/' + this.user.company.id + '/shops')
     .subscribe( data => {
       this.spinner.hide();
       this.spots = data;
