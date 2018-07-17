@@ -20,7 +20,7 @@ h1{
     padding: 20px;
     font-weight: 600;
     color: #343a40;
-    border-bottom: 1px solid #ffb300;
+    border-bottom: 1px solid #63d297;
 }
 
 h3{
@@ -36,13 +36,13 @@ p{
 
 .card-footer{
     background-color: white;
-    border-top: #ffb300 1px solid;
+    border-top: #63d297 1px solid;
     padding: 20px 0;
     text-align: center;
 }
 
 hr{
-    background-color: #ffb300;
+    background-color: #63d297;
 }
 
 .error{
@@ -53,7 +53,7 @@ hr{
 }
 
 .success{
-    color: #ffb300;
+    color: #63d297;
     font-weight: 600;
     font-size: 18px;
     text-align: center;

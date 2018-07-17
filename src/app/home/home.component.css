@@ -50,7 +50,7 @@
 }
 
 .bg-texture-collage-black{
-    background: linear-gradient(-45deg,#ffb300 33%,transparent 0),linear-gradient(-45deg,#343a40 67%,transparent 0),linear-gradient(-45deg,#ffb300 100%,transparent 0)
+    background: linear-gradient(-45deg,#63d297 33%,transparent 0),linear-gradient(-45deg,#343a40 67%,transparent 0),linear-gradient(-45deg,#63d297 100%,transparent 0)
 }
 
 .bg-black{
@@ -58,7 +58,7 @@
 }
 
 .btn-custom{
-    background: #ffb300;
+    background: #63d297;
     color: #343a40;
     font-weight: 600;
     border: 2px solid #343a40;
@@ -66,8 +66,8 @@
 }
 
 .btn-custom:hover{
-    color: #ffb300;
-    border-color: #ffb300;
+    color: #63d297;
+    border-color: #63d297;
     border-radius: 17.5px;
     background: #343a40;
 }
@@ -106,7 +106,7 @@ label{
 }
 
 .form-control:focus{
-    border-color: #ffb300;
+    border-color: #63d297;
 }
 
 button[type="submit"]{
@@ -116,7 +116,7 @@ button[type="submit"]{
     height: 50px;
     max-width: 200px;
     width: 100%;
-    background: #ffb300;
+    background: #63d297;
     font-family: Catamaran,sans-serif;
     color: #343a40;
     font-weight: 600;
@@ -128,8 +128,8 @@ button[type="submit"]{
 
 button[type="submit"]:hover{
     background: #343a40;
-    border-color: #ffb300;
-    color: #ffb300;
+    border-color: #63d297;
+    color: #63d297;
 }
 
 .modal-footer{

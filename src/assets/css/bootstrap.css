@@ -1,12 +1,12 @@
 ﻿/*!
-* Created by Kroplet (https://www.kroplet.com) 
-* The easiest way to create Bootstrap 4 themes. 
+* Created by Kroplet (https://www.kroplet.com)
+* The easiest way to create Bootstrap 4 themes.
 */
 
 /*!
-* Bootstrap v4.0.0-beta.2 (https://getbootstrap.com) 
-* Copyright 2011-2017 The Bootstrap Authors 
-* Copyright 2011-2017 Twitter, Inc. 
+* Bootstrap v4.0.0-beta.2 (https://getbootstrap.com)
+* Copyright 2011-2017 The Bootstrap Authors
+* Copyright 2011-2017 Twitter, Inc.
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)*/
 @import url("https://fonts.googleapis.com/css?family=Catamaran:200,300,400,500,600,700,900");
 :root {
@@ -6506,7 +6506,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff; }
 
 .navbar .nav-item .active, .navbar .nav-link:hover, .navbar .navbar-brand:hover {
-  color: #ffb300 !important; }
+  color: #63d297 !important; }
 
 .hero {
   height: 100vh;
@@ -6557,10 +6557,10 @@ section {
 * Background Colors
 ================================================*/
 .bg-texture {
-  background: linear-gradient(-45deg, #ffb300 33%, transparent 0%), linear-gradient(-45deg, #512DA8 100%, transparent 33%); }
+  background: linear-gradient(-45deg, #63d297 33%, transparent 0%), linear-gradient(-45deg, #512DA8 100%, transparent 33%); }
 
 .bg-texture-collage {
-  background: linear-gradient(-45deg, #ffb300 33%, transparent 0%), linear-gradient(-45deg, #512DA8 67%, transparent 33%), linear-gradient(-45deg, #ffb300 100%, transparent 67%); }
+  background: linear-gradient(-45deg, #63d297 33%, transparent 0%), linear-gradient(-45deg, #512DA8 67%, transparent 33%), linear-gradient(-45deg, #63d297 100%, transparent 67%); }
 
 .bg-alt {
   background-color: #fff; }
@@ -6575,7 +6575,7 @@ section {
   background-color: #512DA8 !important; }
 
 .bg-orange {
-  background-color: #ffb300; }
+  background-color: #63d297; }
 
 /*===============================================
 * Text Colors

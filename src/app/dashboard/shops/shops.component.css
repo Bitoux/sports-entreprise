@@ -17,20 +17,21 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.search, 
+.search,
 .add{
     display: inline-block;
     width: 50%;
-    text-align: center;
+    text-align: right;
+    padding: 0 15px;
 }
 
 .search input{
     margin-top: 24px;
     background-color: #343a40;
-    border: 1px solid #ffb300;
+    border: 1px solid #63d297;
     height: 30px;
     outline: none;
-    text-align: right;
+    text-align: left;
     padding: 0 20px;
     border-radius: 15px;
     color: white;
@@ -39,7 +40,7 @@
 
 .add button{
     outline: none;
-    background-color: #ffb300;
+    background-color: #63d297;
     border: none;
     height: 36px;
     border-radius: 4px;
@@ -78,7 +79,7 @@
 }
 
 .list-container .list .list-item .title{
-    border-bottom: 1px solid #ffb300;
+    border-bottom: 1px solid #63d297;
     margin: 0 30px;
     padding: 15px 0;
     text-align: center;
@@ -90,8 +91,8 @@
     color: white;
     margin: 0px 30px;
     padding: 20px 0;
-    border-bottom: 1px solid #ffb300;
-    height: 120px;
+    border-bottom: 1px solid #63d297;
+    height: 65px;
 }
 
 .list-container .list .list-item .dates p{
@@ -117,7 +118,7 @@
 }
 
 .list-container .list .list-item .actions button.edit{
-    background-color: #ffb300;
+    background-color: #63d297;
 }
 
 .list-container .list .list-item .actions button.delete{
@@ -183,7 +184,7 @@
         margin-top: 122px;
     }
 
-    .search, 
+    .search,
     .add{
         display: block;
         margin: 0 auto;

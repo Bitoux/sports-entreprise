@@ -17,6 +17,7 @@ export class SpecialEventsComponent implements OnInit {
   events: any;
   modalRef: BsModalRef;
   eventToDelete: any;
+  searchText: String = '';
 
   constructor(
     private router: Router,
@@ -32,7 +33,7 @@ export class SpecialEventsComponent implements OnInit {
     this.paymentCheck();
 
     this.getSpecialEvent();
-    
+
   }
 
   openModal(template, event) {

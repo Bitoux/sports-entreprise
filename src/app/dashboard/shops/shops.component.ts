@@ -16,6 +16,7 @@ export class ShopsComponent implements OnInit {
   spots: any;
   modalRef: BsModalRef;
   spotToDelete: any;
+  searchText: String = '';
 
   constructor(
     private router: Router,

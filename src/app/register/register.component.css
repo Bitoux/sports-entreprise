@@ -67,7 +67,7 @@ input[type="checkbox"].form-control + label{
 }
 
 input[type="checkbox"].form-control:checked{
-    background-color: #ffb300;
+    background-color: #63d297;
 }
 
 .form-control{
@@ -85,7 +85,7 @@ input[type="checkbox"].form-control:checked{
 }
 
 .form-control:focus{
-    border-color: #ffb300;
+    border-color: #63d297;
 }
 
 .alert-danger{
@@ -100,7 +100,7 @@ button[type="submit"]{
     height: 50px;
     max-width: 200px;
     width: 100%;
-    background: #ffb300;
+    background: #63d297;
     font-family: Catamaran,sans-serif;
     color: #343a40;
     font-weight: 600;
@@ -112,8 +112,8 @@ button[type="submit"]{
 
 button[type="submit"]:hover{
     background: #343a40;
-    border-color: #ffb300;
-    color: #ffb300;
+    border-color: #63d297;
+    color: #63d297;
 }
 
 .card-footer{

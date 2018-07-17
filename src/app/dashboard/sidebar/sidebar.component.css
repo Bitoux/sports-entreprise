@@ -17,8 +17,8 @@
 h4{
     font-size: 20px;
     color: white;
-    border-bottom: 1px solid #ffb300;
-    padding-bottom: 10px; 
+    border-bottom: 1px solid #63d297;
+    padding-bottom: 10px;
 }
 
 .nav{
@@ -35,7 +35,7 @@ h4{
 
 .nav ul li a:hover,
 .nav ul li p:hover{
-    color: #ffb300;
+    color: #63d297;
 }
 
 .nav ul li a,
@@ -88,6 +88,6 @@ h4{
     .burger i{
         color: white;
         margin-top: 11px;
-        margin-left: 12px;    
+        margin-left: 12px;
     }
 }

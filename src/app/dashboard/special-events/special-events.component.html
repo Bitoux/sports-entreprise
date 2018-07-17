@@ -2,7 +2,7 @@
 <div class="main-container">
   <div class="top-container">
     <div class="search">
-      <input type="text" placeholder="Search ..." name="" id="">
+      <input type="text" placeholder="Search ..." name="" id="" [(ngModel)]="searchText">
     </div>
     <div class="add">
       <button (click)="goCreateEvent()"><i class="material-icons dp18">add</i> Add a new Event</button>
@@ -12,7 +12,7 @@
     <h1>Your Spo(r)ts events</h1>
     <p>In this section, you can find all your events create with your pro account.</p>
     <ul class="list">
-      <li class="list-item" *ngFor="let event of events">
+      <li class="list-item" *ngFor="let event of events | spot : searchText">
         <div class="title">
           {{event.spot.name}}
         </div>
@@ -47,6 +47,6 @@
 <ngx-spinner
     bdColor = "rgba(52,58,64,0.9)"
     size = "medium"
-    color = "#ffb300"
+    color = "#63d297"
     type = "ball-climbing-dot"
     ></ngx-spinner>

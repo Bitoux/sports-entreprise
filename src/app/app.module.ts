@@ -26,6 +26,8 @@ import { EditAccountComponent } from './dashboard/edit-account/edit-account.comp
 import { ShopsComponent } from './dashboard/shops/shops.component';
 import { ShopsCreateComponent } from './dashboard/shops-create/shops-create.component';
 import { ShopsEditComponent } from './dashboard/shops-edit/shops-edit.component';
+import {FilterPipe} from './shared/filter.pipe';
+import {FilterSpotPipe} from './shared/filterSpot.pipe';
 
 
 
@@ -45,7 +47,9 @@ import { ShopsEditComponent } from './dashboard/shops-edit/shops-edit.component'
     EditAccountComponent,
     ShopsComponent,
     ShopsCreateComponent,
-    ShopsEditComponent
+    ShopsEditComponent,
+    FilterPipe,
+    FilterSpotPipe
   ],
   imports: [
     BrowserModule,

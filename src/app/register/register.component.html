@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="city">City *</label>
                     <input type="text" class="form-control" id="city" name="city" [(ngModel)]="company.city" required #city="ngModel">
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="form-group">
-                
+
                     <label for="passwordConfirm">Confirm password *</label>
                     <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" compare="password" [(ngModel)]="company.passwordConfirm" #passwordConfirm="ngModel"  required>
                     <div *ngIf="passwordConfirm.invalid && (passwordConfirm.dirty || passwordConfirm.touched)">
@@ -77,7 +77,7 @@
                             Password confirmation do not match
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="form-group">
@@ -96,8 +96,8 @@
         </div>
     </div>
 
-  
-  
+
+
 </div>
 
 <ng-template #template>
@@ -109,7 +109,7 @@
     </div>
     <div class="modal-body">
         <p>Your account has been created. Go back to the home page to process login.</p>
-        
+
         <button (click)="goBackHome()" class="back">Back to Home</button>
     </div>
   </ng-template>
@@ -117,6 +117,6 @@
   <ngx-spinner
     bdColor = "rgba(52,58,64,0.9)"
     size = "medium"
-    color = "#ffb300"
+    color = "#63d297"
     type = "ball-climbing-dot"
     ></ngx-spinner>

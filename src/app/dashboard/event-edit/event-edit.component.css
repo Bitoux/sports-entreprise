@@ -19,7 +19,7 @@ h1{
 .form-control{
     border: 0;
     box-shadow: none;
-    border-bottom: 1px solid #ffb300;
+    border-bottom: 1px solid #63d297;
     font-size: 16px;
     color: #343a40;
     border-radius: 0;
@@ -28,7 +28,7 @@ h1{
 textarea.form-control{
     resize: none;
     height: 350px;
-    border: 1px solid #ffb300;
+    border: 1px solid #63d297;
 }
 
 .list-group.addresses-list{
@@ -42,7 +42,7 @@ textarea.form-control{
 
 .list-group.addresses-list .list-group-item{
     border-radius: 0;
-    border-color: #ffb300;
+    border-color: #63d297;
 }
 
 #map{
@@ -87,7 +87,7 @@ button[type="submit"]{
     height: 50px;
     margin-left: auto;
     margin-top: 40px;
-    border: 2px solid #ffb300;
+    border: 2px solid #63d297;
     background-color: #343a40;
     font-weight: 600;
     color: white;
@@ -98,7 +98,7 @@ button[type="submit"]{
 
 button[type="submit"]:hover{
     border-color: #343a40;
-    background-color: #ffb300;
+    background-color: #63d297;
     color: #343a40;
 }
 
