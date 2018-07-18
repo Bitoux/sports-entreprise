@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {LocalStorageService} from 'ngx-webstorage';
 import { HttpService } from '../../shared/provider/http.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
+
+declare var google;
 
 @Component({
   selector: 'app-edit-account',
@@ -13,6 +15,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class EditAccountComponent implements OnInit {
   
+  // GOOGLE MAP
+  @ViewChild('mapGoogle') mapElement: ElementRef;
+  lat: string;
+  lng: string;
+  mapGoogle: any;
+  marker: any;
+
   // PAGE
   user: any;
   countries: any;
@@ -51,6 +60,14 @@ export class EditAccountComponent implements OnInit {
     this.initTest();
     this.paymentCheck();
     console.log(this.user);
+    this.lat = '48.866667';
+    this.lng = '2.333333';
+    if(this.user.pin_map){
+      this.loadMap('http://localhost:8000/uploads/company/'+this.user.pin_map);
+    }else{
+      console.log('No pic');
+    }
+    
   }
 
   initTest(){
@@ -93,8 +110,10 @@ export class EditAccountComponent implements OnInit {
       this.file = files.item(0);
       this.changedFile = true;
     }else{
+      console.log(files.item(0));
       this.pinMap = files.item(0);
       this.changedPin = true;
+      //this.loadMap('aze');
     }
     
     console.log(this.file);
@@ -144,6 +163,11 @@ export class EditAccountComponent implements OnInit {
       this.storage.store('user', this.user);
       this.openModal(template);
       this.spinner.hide();
+      if(this.changedPin){
+        this.deleteMarker();
+        let latLng = new google.maps.LatLng(this.lat, this.lng);
+        this.addMarker(latLng, 'http://localhost:8000/uploads/company/'+this.user.pin_map);
+      }
     }, error => {
       this.errorRegister = true;
       this.spinner.hide();
@@ -162,6 +186,40 @@ export class EditAccountComponent implements OnInit {
   goDashboard(){
     this.closeModal();
     this.router.navigate(['/dashboard/events']);
+  }
+
+  loadMap(image){
+    let latLng = new google.maps.LatLng(this.lat, this.lng);
+    let mapOptions = {
+      center: latLng,
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    this.mapGoogle = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    this.addMarker(latLng, image);
+  }
+
+  addMarker(latLng, img){
+    console.log(img);
+    this.marker = new google.maps.Marker({
+      map: this.mapGoogle,
+      animation: google.maps.Animation.DROP,
+      position: latLng,
+      icon : {
+        url: img, origin: new google.maps.Point(0, 0), anchor: new google.maps.Point(5, 0), scaledSize: new google.maps.Size(25, 25)
+      }
+    });
+    let content = 'Pin Example';
+    this.addInfoWindow(this.marker, content);
+  }
+
+  addInfoWindow(marker, content){
+    let infoWindow = new google.maps.InfoWindow({ content: content });
+    google.maps.event.addListener(marker, 'click', () => { infoWindow.open(this.mapGoogle, marker); });
+  }
+
+  deleteMarker(){
+    this.marker.setMap(null);
   }
 
 }

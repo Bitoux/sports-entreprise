@@ -147,9 +147,6 @@ export class EventCreateComponent implements OnInit {
     .subscribe(data => {
       this.spinner.hide();
       console.log(data);
-      this.user = data;
-      //this.storage.clear('user');
-      //this.storage.store('user', this.user);
       this.openModal(template)
     }, error => {
       this.errorRegister = true;
