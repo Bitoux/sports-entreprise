@@ -181,7 +181,11 @@ export class EventEditComponent implements OnInit {
       longitude: this.lng,
       date: this.event.date,
       hour: this.event.hour,
-      filters: this.checkedFilters
+      filters: this.checkedFilters,
+      price: this.event.price,
+      nb_user: this.event.nb_user,
+      level: this.event.level,
+      time: this.event.time
     };
 
     console.log(event);

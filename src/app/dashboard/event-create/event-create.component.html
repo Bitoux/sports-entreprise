@@ -43,9 +43,16 @@
 
       <div #mapGoogle id="map"></div>
 
-      <div class="form-group checkbox" *ngFor="let filter of filters; let i = index">
-        <label for="filter-{{filter.id}}">{{filter.designation}}</label>
-        <input type="checkbox" class="form-control" id="filter-{{filter.id}}" name="filter-{{filter.id}}" [(ngModel)]="checkedFilters[i]">
+      <div class="form-group checkbox">
+        <div *ngFor="let filter of filters; let i = index">
+          <label *ngIf="filter.designation !== 'Shops'" for="filter-{{filter.id}}">{{filter.designation}}</label>
+          <input *ngIf="filter.designation !== 'Shops'" type="checkbox" class="form-control" id="filter-{{filter.id}}" name="filter-{{filter.id}}" [(ngModel)]="checkedFilters[i]">
+        </div>
+        <div *ngIf="checkboxRequire == true" class="alert alert-danger">
+            <div>
+              One filter is required.
+            </div>
+          </div>
       </div>
 
       <div class="form-group">
@@ -67,6 +74,55 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group">
+          <label for="price">Event price *</label>
+          <input type="text" class="form-control" id="price" name="price" [(ngModel)]="event.price" #price="ngModel" required>
+          <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+            <div *ngIf="price.errors.required">
+              Price is required.
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="nb_user">Number of user max *</label>
+          <input type="number" class="form-control" id="nb_user" name="nb_user" [(ngModel)]="event.nb_user" #nb_user="ngModel" required>
+          <div *ngIf="nb_user.invalid && (nb_user.dirty || nb_user.touched)" class="alert alert-danger">
+            <div *ngIf="nb_user.errors.required">
+              Number max is required.
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+            <label for="level">Level *</label>
+            <select style="height: 35px;" class="form-control" id="level" required #level="ngModel" name="level" [(ngModel)]="event.level">
+            <option [value]="0">Beginner</option>
+            <option [value]="1">Intermediare</option>
+            <option [value]="2">Good</option>
+            </select>
+            <div *ngIf="level.invalid && (level.dirty || level.touched)" class="alert alert-danger">
+                <div *ngIf="level.errors.required">
+                    Level is required.
+                </div>
+            </div>
+        </div>
+  
+        <div class="form-group">
+            <label for="time">Time *</label>
+            <select style="height: 35px;" class="form-control" id="time" required #time="ngModel" name="time" [(ngModel)]="event.time">
+            <option [value]="0">1h</option>
+            <option [value]="1">1h30</option>
+            <option [value]="2">2h</option>
+            <option [value]="3">+2h</option>
+            </select>
+            <div *ngIf="time.invalid && (time.dirty || time.touched)" class="alert alert-danger">
+                <div *ngIf="time.errors.required">
+                    time is required.
+                </div>
+            </div>
+        </div>
 
       <button type="submit" [disabled]="eventCreateForm.invalid">Create</button>
 

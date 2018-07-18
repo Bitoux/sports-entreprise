@@ -135,10 +135,14 @@ export class EventCreateComponent implements OnInit {
       date: this.event.date,
       description: this.event.description,
       hour: this.event.hour,
-      idMap: this.user.map.id
+      idMap: this.user.map.id,
+      price: this.event.price,
+      nb_user: this.event.nb_user,
+      level: this.event.level,
+      time: this.event.time
     }
     
-    console.log(event);
+    console.log(spot);
     this.httpService.post('/api/proevents/create', spot)
     .subscribe(data => {
       this.spinner.hide();
