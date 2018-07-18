@@ -63,7 +63,7 @@ export class EditAccountComponent implements OnInit {
     this.lat = '48.866667';
     this.lng = '2.333333';
     if(this.user.pin_map){
-      this.loadMap('http://localhost:8000/uploads/company/'+this.user.pin_map);
+      this.loadMap('http://52.ip-193-70-3.eu/app_dev.php/uploads/company/'+this.user.pin_map);
     }else{
       console.log('No pic');
     }
@@ -166,7 +166,7 @@ export class EditAccountComponent implements OnInit {
       if(this.changedPin){
         this.deleteMarker();
         let latLng = new google.maps.LatLng(this.lat, this.lng);
-        this.addMarker(latLng, 'http://localhost:8000/uploads/company/'+this.user.pin_map);
+        this.addMarker(latLng, 'http://52.ip-193-70-3.eu/app_dev.php/uploads/company/'+this.user.pin_map);
       }
     }, error => {
       this.errorRegister = true;

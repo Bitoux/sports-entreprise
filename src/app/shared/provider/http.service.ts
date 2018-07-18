@@ -17,7 +17,7 @@ export function authHttpServiceFactory(http) {
 @Injectable()
 export class HttpService {
 
-  baseUrl: string = 'http://localhost:8000';
+  baseUrl: string = 'http://52.ip-193-70-3.eu/app_dev.php';
 
   constructor(
     public http: Http,
